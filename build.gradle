@@ -18,7 +18,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
+    compile 'mysql:mysql-connector-java'
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
 
@@ -37,13 +37,10 @@ test {
 //    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
 //    implementation 'org.springframework.session:spring-session-core'
-//    compileOnly 'org.projectlombok:lombok'
+
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-//    compile 'mysql:mysql-connector-java'
-//    annotationProcessor 'org.projectlombok:lombok'
+
 //    //runtimeOnly('com.h2database:h2')
-//
-//    //compile group: 'org.springframework.security', name: 'spring-security-config', version: '5.4.0'
 
 //}
 
