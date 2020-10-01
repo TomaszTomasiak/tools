@@ -1,11 +1,15 @@
 package com.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 
+@Data
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
@@ -21,22 +25,19 @@ public class User implements Serializable {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "phone")
     private String phone;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "birthDate")
-    private Date birthDate;
-
     @Column(name = "pesel")
     private String pesel;
+
+    public User() {
+        super();
+    }
 }
