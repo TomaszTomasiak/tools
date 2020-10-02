@@ -7,7 +7,9 @@ import javax.validation.constraints.Size;
 
 import com.validator.PasswordMatches;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
+@Component
 @Data
 @PasswordMatches
 public class UserRegistrationDto implements Serializable {

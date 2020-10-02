@@ -2,9 +2,7 @@ package com.service;
 
 import com.domain.User;
 
-import com.dto.UserRegistrationDto;
 import com.exception.EmailExistsException;
-import com.exception.LoginExistsException;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,13 +15,13 @@ public interface UserService {
 
     Optional<User> findById(Long id);
 
-    Optional<User>getUserByMail(String mail);
+    User getUserByEmail(String mail);
 
     void delete(Long id);
 
     void deleteAll();
 
-    User addUser(UserRegistrationDto user) throws EmailExistsException;
+    //User addUser(User user) throws EmailExistsException;
 
     void addRoleToUser(Long userId, Long roleId);
 }

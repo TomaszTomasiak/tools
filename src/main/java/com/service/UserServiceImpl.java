@@ -1,10 +1,7 @@
 package com.service;
 
 import com.domain.User;
-import com.dto.UserDto;
-import com.dto.UserRegistrationDto;
 import com.exception.EmailExistsException;
-import com.exception.LoginExistsException;
 import com.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -57,19 +52,19 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteAll();
     }
 
-    @Override
-    public Optional<User> getUserByMail(String mail) {
-        return userRepository.findUserByMail(mail);
+
+    public User getUserByEmail(String mail) {
+        return userRepository.findUserByEmail(mail);
     }
 
-    @Override
-    public User addUser(UserRegistrationDto user) throws EmailExistsException {
 
-        if (checkEmailExists(user.getEmail())) {
-            throw new EmailExistsException("There is an account with that email adress: " + user.getEmail());
-        }
-        return userRepository.addUser(user);
-    }
+//    public User addUser(User user) throws EmailExistsException {
+//
+//        if (checkEmailExists(user.getEmail())) {
+//            throw new EmailExistsException("There is an account with that email adress: " + user.getEmail());
+//        }
+//        return userRepository.addUser(user);
+//    }
 
 
     @Override
@@ -79,9 +74,9 @@ public class UserServiceImpl implements UserService{
 
     public boolean checkEmailExists(String email) {
 
-        Optional<User> user = userRepository.findUserByMail(email);
+        User user = userRepository.findUserByEmail(email);
 
-        if (user.isPresent()) {
+        if (user != null) {
             return true;
         } else {
             return false;
