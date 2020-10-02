@@ -3,10 +3,12 @@ package com.service;
 import com.domain.User;
 
 import com.exception.EmailExistsException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface UserService {
 
     User save(User user);
