@@ -1,12 +1,12 @@
 package com.dto;
 
 import java.io.Serializable;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.validator.PasswordMatches;
 import lombok.Data;
-import org.hibernate.validator.constraints.Email;
 
 @Data
 @PasswordMatches
