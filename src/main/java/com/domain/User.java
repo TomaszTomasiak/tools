@@ -6,9 +6,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "users")
@@ -37,7 +38,22 @@ public class User implements Serializable {
     @Column(name = "pesel")
     private String pesel;
 
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "AppUsersRoles", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "userRoleID"))
+    private Set<UserRole> userRolesList = new HashSet<UserRole>();
+
     public User() {
         super();
+    }
+
+    public User(Long id, String name, String surname, String email, String password, String phone, String pesel) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.pesel = pesel;
     }
 }
