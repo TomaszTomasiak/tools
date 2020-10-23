@@ -22,7 +22,7 @@ public class UserDtoCreator {
 
     public static UserDto userDtoCreator() {
         return UserDto.builder()
-               // .id(USER_ID)
+                .id(USER_ID)
                 .name(FIRST_NAME)
                 .surname(LAST_NAME)
                 .email(MAIL)
