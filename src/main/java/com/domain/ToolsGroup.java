@@ -23,5 +23,4 @@ public class ToolsGroup {
             fetch = FetchType.LAZY
     )
     List<Tool> toolList = new ArrayList<>();
-
 }

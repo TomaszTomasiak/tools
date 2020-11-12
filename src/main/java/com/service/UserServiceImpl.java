@@ -1,7 +1,6 @@
 package com.service;
 
 import com.domain.User;
-import com.exception.EmailExistsException;
 import com.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
