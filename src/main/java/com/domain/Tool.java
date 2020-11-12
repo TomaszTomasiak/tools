@@ -25,12 +25,5 @@ public class Tool {
     @JoinColumn(name="groupId")
     private ToolsGroup groupId;
 
-    private boolean available;
-
-
-
-
-
-
-
+//    private boolean available;
 }
