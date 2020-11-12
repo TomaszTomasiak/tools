@@ -1,6 +1,5 @@
 package com.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -41,7 +40,7 @@ public class User implements Serializable {
     @Builder.Default
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "AppUsersRoles", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "userRoleID"))
-    private Set<UserRole> userRolesList = new HashSet<UserRole>();
+    private Set<UserRole> userRolesList = new HashSet<>();
 
     public User() {
         super();
