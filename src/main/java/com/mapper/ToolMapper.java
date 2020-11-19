@@ -28,6 +28,7 @@ public class ToolMapper {
         ToolDto toolDtoBean = new ToolDto();
         toolDtoBean.setId(tool.getId());
         toolDtoBean.setProducer(tool.getProducer());
+
         toolDtoBean.setModel(tool.getModel());
         toolDtoBean.setGroupId(tool.getId());
         return toolDtoBean;
