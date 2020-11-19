@@ -18,6 +18,7 @@ public class ToolMapper {
     public Tool mapToTool(final ToolDto dto) {
         Tool toolBean = new Tool();
         toolBean.setId(dto.getId());
+        toolBean.setName(dto.getName());
         toolBean.setProducer(dto.getProducer());
         toolBean.setModel(dto.getModel());
         toolBean.setGroupId(groupRepository.findByToolsGroupById(dto.getId()));
@@ -27,8 +28,8 @@ public class ToolMapper {
     public ToolDto mapToToolDto(final Tool tool) {
         ToolDto toolDtoBean = new ToolDto();
         toolDtoBean.setId(tool.getId());
+        toolDtoBean.setName(tool.getName());
         toolDtoBean.setProducer(tool.getProducer());
-
         toolDtoBean.setModel(tool.getModel());
         toolDtoBean.setGroupId(tool.getId());
         return toolDtoBean;
