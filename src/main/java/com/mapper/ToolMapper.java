@@ -21,7 +21,7 @@ public class ToolMapper {
         toolBean.setName(dto.getName());
         toolBean.setProducer(dto.getProducer());
         toolBean.setModel(dto.getModel());
-        toolBean.setGroupId(groupRepository.findByToolsGroupById(dto.getId()));
+        toolBean.setGroupId(groupRepository.findToolsGroupById(dto.getId()));
         return toolBean;
     }
 
