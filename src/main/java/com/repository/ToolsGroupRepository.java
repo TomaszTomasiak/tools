@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Repository
 public interface ToolsGroupRepository extends CrudRepository<ToolsGroup, Long> {
 
-    ToolsGroup findByToolsGroupById(Long id);
+   ToolsGroup findToolsGroupById(Long id);
 
     @Override
     List<ToolsGroup> findAll();

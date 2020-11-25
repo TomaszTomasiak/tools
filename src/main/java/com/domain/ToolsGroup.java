@@ -12,7 +12,7 @@ import java.util.List;
 public class ToolsGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -23,4 +23,5 @@ public class ToolsGroup {
             fetch = FetchType.LAZY
     )
     List<Tool> toolList = new ArrayList<>();
+
 }
