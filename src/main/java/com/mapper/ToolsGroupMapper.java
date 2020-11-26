@@ -3,7 +3,6 @@ package com.mapper;
 import com.domain.ToolsGroup;
 import com.dto.ToolsGroupDto;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
