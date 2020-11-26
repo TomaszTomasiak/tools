@@ -138,7 +138,7 @@ public class ToolControllerTestSuite {
     }
 
     @Test
-    public void shouldNotCreateUserBecauseUserWithIdAlreadyExists() throws Exception {
+    public void shouldNotCreateToolBecauseToolWithIdAlreadyExists() throws Exception {
         ToolDto toolDto = ToolDtoCreator.toolDtoCreator();
         toolDto.setId(1L);
 

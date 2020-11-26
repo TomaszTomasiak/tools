@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.domain.ToolsGroup;
 import com.dto.ToolsGroupDto;
 import com.exception.NotFoundException;
 import com.mapper.ToolsGroupMapper;
@@ -33,20 +32,20 @@ public class ToolsGroupController {
     }
 
     @GetMapping("/{id}")
-    public ToolsGroupDto getTool(@PathVariable("id") Long id) throws NotFoundException {
+    public ToolsGroupDto getGroup(@PathVariable("id") Long id) throws NotFoundException {
         log.debug("REST request to get group with id: {}", id);
         return mapper.mapToToolsGroupDto(service.getGroup(id).orElseThrow(NotFoundException::new));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ToolsGroupDto createTool(@RequestBody ToolsGroupDto dto) {
+    public ToolsGroupDto createGroup(@RequestBody ToolsGroupDto dto) {
         log.debug("REST request to add new group: {}", dto);
         service.saveGroup(mapper.mapToToolsGroup(dto));
         return dto;
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ToolsGroupDto updateToolById(@PathVariable("id") Long id, @RequestBody ToolsGroupDto dto) {
+    public ToolsGroupDto updateGroupById(@PathVariable("id") Long id, @RequestBody ToolsGroupDto dto) {
         log.debug("REST request to update group with id: {}", id);
         return mapper.mapToToolsGroupDto(service.saveGroup(mapper.mapToToolsGroup(dto)));
     }
