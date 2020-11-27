@@ -5,7 +5,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -41,6 +43,15 @@ public class User implements Serializable {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "AppUsersRoles", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "userRoleID"))
     private Set<UserRole> userRolesList = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(
+            targetEntity =  Bookings.class,
+            mappedBy = "USER_ID",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Bookings> toolsBookings = new ArrayList<>();
 
     public User() {
         super();
