@@ -20,7 +20,7 @@ public class UserRole implements Serializable {
 	private String type;
 
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "userRolesList")
-	private Set<User> userSet = new HashSet<User>();
+	private Set<User> userSet = new HashSet<>();
 
 	public UserRole() {
 		super();
