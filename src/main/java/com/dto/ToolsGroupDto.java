@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ToolsGroupDto {
-    private Long id;
+    private long id;
     private String name;
     List<Tool> toolList;
 }
