@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ToolDto {
-    private Long id;
+    private long id;
     private String name;
     private String producer;
     private String model;
-    private Long groupId;
+    private long groupId;
 }

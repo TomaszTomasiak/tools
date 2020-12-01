@@ -16,5 +16,5 @@ public interface ToolRepository extends CrudRepository<Tool, Long> {
     @Override
     List<Tool> findAll();
 
-    Tool findToolById(Long id);
+    Tool findToolById(long id);
 }
