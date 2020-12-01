@@ -37,7 +37,7 @@ public class ToolMapper {
 
     public List<ToolDto> mapToToolDtoList(final List<Tool> tools) {
         return tools.stream()
-                .map(t -> mapToToolDto(t))
+                .map(this::mapToToolDto)
                 .collect(Collectors.toList());
     }
 }
