@@ -34,12 +34,12 @@ public class BookingsServiceImpl implements BookingsService {
     }
 
     @Override
-    public Bookings getToolById(long id) {
+    public Bookings getBookingById(long id) {
         return repository.findBookingsById(id);
     }
 
     @Override
-    public void deleteTool(long id) {
+    public void deleteBooking(long id) {
         repository.deleteById(id);
     }
 }
