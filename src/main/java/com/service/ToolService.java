@@ -12,11 +12,11 @@ import java.util.Optional;
 public interface ToolService {
     public List<Tool> getAllTools();
 
-    public Optional<Tool> getTool(Long id);
+    public Optional<Tool> getTool(long id);
 
     public Tool saveTool(Tool tool);
 
-    public Tool getToolById(Long id);
+    public Tool getToolById(long id);
 
-    public void deleteTool(Long id);
+    public void deleteTool(long id);
 }

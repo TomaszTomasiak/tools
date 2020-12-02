@@ -23,7 +23,7 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
-    public Optional<Tool> getTool(Long id) {
+    public Optional<Tool> getTool(long id) {
         return repository.findById(id);
     }
 
@@ -33,12 +33,12 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
-    public Tool getToolById(Long id) {
+    public Tool getToolById(long id) {
         return repository.findToolById(id);
     }
 
     @Override
-    public void deleteTool(Long id) {
+    public void deleteTool(long id) {
         repository.deleteById(id);
     }
 }

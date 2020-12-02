@@ -18,7 +18,7 @@ public class ToolsGroupServiceImpl implements ToolsGroupService {
     }
 
     @Override
-    public Optional<ToolsGroup> getGroup(Long id) {
+    public Optional<ToolsGroup> getGroup(long id) {
         return Optional.empty();
     }
 
@@ -28,7 +28,7 @@ public class ToolsGroupServiceImpl implements ToolsGroupService {
     }
 
     @Override
-    public ToolsGroup getGroupById(Long id) {
+    public ToolsGroup getGroupById(long id) {
         return null;
     }
 }

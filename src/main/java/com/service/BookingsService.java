@@ -15,7 +15,7 @@ public interface BookingsService {
 
     public Bookings saveBookings(Bookings bookings);
 
-    public Bookings getToolById(long id);
+    public Bookings getBookingById(long id);
 
-    public void deleteTool(long id);
+    public void deleteBooking(long id);
 }
