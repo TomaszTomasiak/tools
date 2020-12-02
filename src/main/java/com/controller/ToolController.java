@@ -32,7 +32,7 @@ public class ToolController {
     }
 
     @GetMapping("/{id}")
-    public ToolDto getTool(@PathVariable("id") Long id) throws NotFoundException {
+    public ToolDto getTool(@PathVariable("id") long id) throws NotFoundException {
         log.debug("REST request to get tool with id: {}", id);
         return mapper.mapToToolDto(service.getTool(id).orElseThrow(NotFoundException::new));
     }
@@ -45,13 +45,13 @@ public class ToolController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ToolDto updateToolById(@PathVariable("id") Long id, @RequestBody ToolDto toolDto) {
+    public ToolDto updateToolById(@PathVariable("id") long id, @RequestBody ToolDto toolDto) {
         log.debug("REST request to update tool with id: {}", id);
         return mapper.mapToToolDto(service.saveTool(mapper.mapToTool(toolDto)));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteToolById(@PathVariable("id") Long id) {
+    public void deleteToolById(@PathVariable("id") long id) {
         log.debug("REST request to delete tool with id: {}", id);
         service.deleteTool(id);
     }

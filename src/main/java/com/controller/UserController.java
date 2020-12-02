@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto updateUserById(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+    public UserDto updateUserById(@PathVariable("id") long id, @RequestBody UserDto userDto) {
         log.debug("REST request to update user with id: {}", id);
         return mapper.toDto(service.save(mapper.toEntity(userDto)));
     }

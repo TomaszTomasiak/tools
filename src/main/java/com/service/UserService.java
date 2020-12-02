@@ -14,15 +14,15 @@ public interface UserService {
 
     List<User> findAll();
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(long id);
 
     User getUserByEmail(String mail);
 
-    void delete(Long id);
+    void delete(long id);
 
     void deleteAll();
 
     //User addUser(User user) throws EmailExistsException;
 
-    void addRoleToUser(Long userId, Long roleId);
+    void addRoleToUser(long userId, long roleId);
 }

@@ -32,7 +32,7 @@ public class ToolsGroupController {
     }
 
     @GetMapping("/{id}")
-    public ToolsGroupDto getGroup(@PathVariable("id") Long id) throws NotFoundException {
+    public ToolsGroupDto getGroup(@PathVariable("id") long id) throws NotFoundException {
         log.debug("REST request to get group with id: {}", id);
         return mapper.mapToToolsGroupDto(service.getGroup(id).orElseThrow(NotFoundException::new));
     }
@@ -45,7 +45,7 @@ public class ToolsGroupController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ToolsGroupDto updateGroupById(@PathVariable("id") Long id, @RequestBody ToolsGroupDto dto) {
+    public ToolsGroupDto updateGroupById(@PathVariable("id") long id, @RequestBody ToolsGroupDto dto) {
         log.debug("REST request to update group with id: {}", id);
         return mapper.mapToToolsGroupDto(service.saveGroup(mapper.mapToToolsGroup(dto)));
     }

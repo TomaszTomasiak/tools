@@ -34,13 +34,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<User> findById(long id) {
         log.debug("Request to get user with id: {}", id);
         return userRepository.findById(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         log.debug("Request to remove user with id: {}", id);
         userRepository.deleteById(id);
     }
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public void addRoleToUser(Long userId, Long roleId) {
+    public void addRoleToUser(long userId, long roleId) {
         //to implement
     }
 
