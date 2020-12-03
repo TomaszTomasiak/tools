@@ -1,5 +1,6 @@
 package com.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "users")
@@ -57,24 +59,4 @@ public class User implements Serializable {
         super();
     }
 
-    public User(Long id, String name, String surname, String email, String password, String phone, String pesel, Set<UserRole> userRolesList) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.pesel = pesel;
-        this.userRolesList = userRolesList;
-    }
-
-    public User(Long id, String name, String surname, String email, String password, String phone, String pesel) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.pesel = pesel;
-    }
 }

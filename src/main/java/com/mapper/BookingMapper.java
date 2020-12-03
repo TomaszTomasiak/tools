@@ -3,6 +3,8 @@ package com.mapper;
 import com.domain.Booking;
 import com.dto.BookingDto;
 import com.repository.BookingRepository;
+import com.repository.ToolRepository;
+import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +15,17 @@ import java.util.stream.Collectors;
 public class BookingMapper {
 
     @Autowired
-    private BookingRepository repository;
+    private ToolRepository toolRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
 
     public Booking mapToBookings(final BookingDto dto) {
         return new Booking(
                 dto.getId(),
-                dto.getTool(),
-                dto.getUser(),
+                toolRepository.findToolById(dto.getToolId()),
+                userRepository.findUserById(dto.getUserId()),
                 dto.getBookedDateFrom(),
                 dto.getBookedDateTo());
     }
@@ -27,8 +33,8 @@ public class BookingMapper {
     public BookingDto mapToDto(final Booking booking) {
         return new BookingDto(
                 booking.getId(),
-                booking.getTool(),
-                booking.getUser(),
+                booking.getTool().getId(),
+                booking.getUser().getId(),
                 booking.getBookedDateFrom(),
                 booking.getBookedDateTo());
     }

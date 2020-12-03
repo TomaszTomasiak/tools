@@ -1,7 +1,5 @@
 package com.dto;
 
-import com.domain.Tool;
-import com.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
