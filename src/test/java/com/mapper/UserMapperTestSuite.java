@@ -49,7 +49,7 @@ public class UserMapperTestSuite {
 
         //Then
         assertNotNull(user);
-        assertEquals(Long.valueOf(1), user.getId());
+        assertEquals(1L, user.getId());
         assertEquals("John", user.getName());
         assertEquals("password", user.getPassword());
     }
@@ -63,7 +63,7 @@ public class UserMapperTestSuite {
 
         //Then
         assertNotNull(userDto);
-        assertEquals(Long.valueOf(1), userDto.getId());
+        assertEquals(1L, userDto.getId());
         assertEquals("Rambo", userDto.getSurname());
         assertEquals("john.rambo@mail.com", userDto.getEmail());
 
