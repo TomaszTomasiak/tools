@@ -148,7 +148,7 @@ public class ToolControllerTestSuite {
         String jsonContent = gson.toJson(toolDto);
 
 
-        mockMvc.perform(post("/api/v1/ecommercee/users")
+        mockMvc.perform(post("/api/v1/ecommercee/tools")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonContent))
                 .andExpect(status().isNotFound());
