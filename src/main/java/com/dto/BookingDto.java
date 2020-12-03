@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @Builder
 public class BookingDto {
     private long id;
-    private Tool tool;
-    private User user;
+    private long toolId;
+    private long userId;
     private LocalDate bookedDateFrom;
     private LocalDate bookedDateTo;
 }
