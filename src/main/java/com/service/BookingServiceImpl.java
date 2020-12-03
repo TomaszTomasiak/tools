@@ -1,8 +1,7 @@
 package com.service;
 
-import com.domain.Bookings;
-import com.domain.Tool;
-import com.repository.BookingsRepository;
+import com.domain.Booking;
+import com.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,29 +11,29 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class BookingsServiceImpl implements BookingsService {
+public class BookingServiceImpl implements BookingService {
 
     @Autowired
-    BookingsRepository repository;
+    BookingRepository repository;
 
 
     @Override
-    public List<Bookings> getAllBookings() {
+    public List<Booking> getAllBookings() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Bookings> getBooking(long id) {
+    public Optional<Booking> getBooking(long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Bookings saveBookings(Bookings bookings) {
-        return repository.save(bookings);
+    public Booking saveBookings(Booking booking) {
+        return repository.save(booking);
     }
 
     @Override
-    public Bookings getBookingById(long id) {
+    public Booking getBookingById(long id) {
         return repository.findBookingsById(id);
     }
 

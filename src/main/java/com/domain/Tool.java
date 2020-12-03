@@ -33,10 +33,10 @@ public class Tool {
 //    private boolean available;
 
     @OneToMany(
-            targetEntity =  Bookings.class,
+            targetEntity =  Booking.class,
             mappedBy = "TOOL_ID",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Bookings> toolsBookings = new ArrayList<>();
+    private List<Booking> toolsBookings = new ArrayList<>();
 }

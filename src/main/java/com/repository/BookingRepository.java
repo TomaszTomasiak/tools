@@ -1,6 +1,6 @@
 package com.repository;
 
-import com.domain.Bookings;
+import com.domain.Booking;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,9 +8,9 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface BookingsRepository extends CrudRepository<Bookings, Long> {
+public interface BookingRepository extends CrudRepository<Booking, Long> {
     @Override
-    List<Bookings> findAll();
+    List<Booking> findAll();
 
-    Bookings findBookingsById(long id);
+    Booking findBookingsById(long id);
 }

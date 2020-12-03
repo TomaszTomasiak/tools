@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Builder
-public class BookingsDto {
+public class BookingDto {
     private long id;
     private Tool tool;
     private User user;

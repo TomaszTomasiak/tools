@@ -46,12 +46,12 @@ public class User implements Serializable {
 
     @Builder.Default
     @OneToMany(
-            targetEntity =  Bookings.class,
+            targetEntity =  Booking.class,
             mappedBy = "USER_ID",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Bookings> toolsBookings = new ArrayList<>();
+    private List<Booking> toolsBookings = new ArrayList<>();
 
     public User() {
         super();
