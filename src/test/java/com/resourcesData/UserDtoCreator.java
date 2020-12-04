@@ -22,7 +22,7 @@ public class UserDtoCreator {
 
     public static UserDto userDtoCreator() {
         return UserDto.builder()
-                .id(USER_ID)
+//                .id(USER_ID)
                 .name(FIRST_NAME)
                 .surname(LAST_NAME)
                 .email(MAIL)
@@ -34,7 +34,7 @@ public class UserDtoCreator {
 
     public static UserDto updatedUserDtoCreator() {
         return UserDto.builder()
-                .id(UPDATED_USER_ID)
+//                .id(UPDATED_USER_ID)
                 .name(UPDATED_NAME)
                 .surname(UPDATED_LAST_NAME)
                 .email(UPDATED_MAIL)

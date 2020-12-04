@@ -50,21 +50,27 @@ public class UserDaoTestSuite {
         //When
         userDao.save(user);
         //Then
-        assertTrue(userDao.findAll().size() == 1);
+        assertTrue(userDao.findAll().size() > 0);
 
     }
 
     @Test
     public void testRemoveUser( ) {
         //Given
-        User user = userMapper.mapToUser(UserDtoCreator.userDtoCreator());
-        //When
+        User user = new User();
+        user.setName("John");
+        user.setEmail("email");
+        //Whenn
         userDao.save(user);
-        long id = user.getId();
+        Long id = user.getId();
+       // System.out.println("id = " + id);
         userDao.deleteById(id);
 
         //Then
         assertTrue(userDao.findAll().size() == 0);
+
+        //CleanUp
+        userDao.deleteAll();
     }
 
 }

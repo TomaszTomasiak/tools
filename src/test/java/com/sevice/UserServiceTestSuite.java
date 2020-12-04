@@ -46,12 +46,16 @@ public class UserServiceTestSuite {
     @Test
     public void testDeleteUser() {
         //Given
+
+        User newUser = user;
         //When
-        userService.save(user);
-        userService.delete(user.getId());
+        userService.save(newUser);
+        long id = newUser.getId();
+
+        userService.delete(id);
 
         //Then
-        assertFalse(userService.findById(user.getId()).isPresent());
+        assertFalse(userService.findById(newUser.getId()).isPresent());
     }
 
     @Test

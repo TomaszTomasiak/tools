@@ -18,7 +18,7 @@ public interface UserService {
 
     User getUserByEmail(String mail);
 
-    void delete(long id);
+    void delete(Long id);
 
     void deleteAll();
 
