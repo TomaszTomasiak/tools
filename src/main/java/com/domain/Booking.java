@@ -20,19 +20,19 @@ public class Booking {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "TOOL_ID")
+    @JoinColumn(name = "tool")
     @NotNull
     private Tool tool;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user")
     @NotNull
     private User user;
 
-    @Column(name = "BOOKED_FROM")
+    @Column(name = "from")
     @NotNull
     private LocalDate bookedDateFrom;
 
-    @Column(name = "BOOKED_TO")
+    @Column(name = "to")
     private LocalDate bookedDateTo;
 }

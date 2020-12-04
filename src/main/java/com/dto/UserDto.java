@@ -1,10 +1,13 @@
 package com.dto;
 
 
+import com.domain.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +22,5 @@ public class UserDto {
     private String password;
     private String phone;
     private String pesel;
+    private Set<UserRole> userRoleSet;
 }

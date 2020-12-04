@@ -29,26 +29,26 @@ public class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         log.debug("REST request to get all users");
-        return mapper.toDto(service.findAll());
+        return mapper.mapToUserDtoList(service.findAll());
     }
 
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable("id") long id) throws NotFoundException {
         log.debug("REST request to get user with id: {}", id);
-        return mapper.toDto(service.findById(id).orElseThrow(NotFoundException::new));
+        return mapper.mapToUserDtoList(service.findById(id).orElseThrow(NotFoundException::new));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto createUser(@RequestBody UserDto userDto) {
         log.debug("REST request to add new user: {}", userDto);
-        service.save(mapper.toEntity(userDto));
+        service.save(mapper.mapToUser(userDto));
         return userDto;
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto updateUserById(@PathVariable("id") long id, @RequestBody UserDto userDto) {
         log.debug("REST request to update user with id: {}", id);
-        return mapper.toDto(service.save(mapper.toEntity(userDto)));
+        return mapper.mapToUserDtoList(service.save(mapper.mapToUser(userDto)));
     }
 
     @DeleteMapping("/{id}")

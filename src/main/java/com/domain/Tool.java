@@ -34,7 +34,7 @@ public class Tool {
 
     @OneToMany(
             targetEntity =  Booking.class,
-            mappedBy = "TOOL_ID",
+            mappedBy = "tool",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
