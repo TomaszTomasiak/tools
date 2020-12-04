@@ -1,16 +1,17 @@
 package com.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "bookings")
 public class Booking {
@@ -20,19 +21,16 @@ public class Booking {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "TOOL_ID")
-    @NotNull
+    @JoinColumn(name = "tool")
     private Tool tool;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    @NotNull
+    @JoinColumn(name = "user")
     private User user;
 
-    @Column(name = "BOOKED_FROM")
-    @NotNull
+    @Column(name = "from")
     private LocalDate bookedDateFrom;
 
-    @Column(name = "BOOKED_TO")
+    @Column(name = "to")
     private LocalDate bookedDateTo;
 }

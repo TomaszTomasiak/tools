@@ -3,6 +3,7 @@ package com.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "users")
@@ -49,14 +51,14 @@ public class User implements Serializable {
     @Builder.Default
     @OneToMany(
             targetEntity =  Booking.class,
-            mappedBy = "USER_ID",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Booking> toolsBookings = new ArrayList<>();
 
-    public User() {
-        super();
-    }
+//    public User() {
+//        super();
+//    }
 
 }

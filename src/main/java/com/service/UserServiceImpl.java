@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         log.debug("Request to remove user with id: {}", id);
         userRepository.deleteById(id);
     }

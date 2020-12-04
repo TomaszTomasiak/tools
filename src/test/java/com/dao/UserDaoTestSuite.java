@@ -2,14 +2,10 @@ package com.dao;
 
 
 import com.domain.User;
-import com.dto.UserDto;
 import com.mapper.UserMapper;
 import com.repository.UserRepository;
-import com.resourcesData.UserCreator;
 import com.resourcesData.UserDtoCreator;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,7 +28,7 @@ public class UserDaoTestSuite {
     public void testUserDaoSave() {
         //Given
 
-        User user = userMapper.toEntity(UserDtoCreator.userDtoCreator());
+        User user = userMapper.mapToUser(UserDtoCreator.userDtoCreator());
         //When
         userDao.save(user);
         //List<User> users = userDao.findAll();
@@ -50,25 +46,31 @@ public class UserDaoTestSuite {
     @Test
     public void testFindAllUsers() {
         //Given
-        User user = userMapper.toEntity(UserDtoCreator.userDtoCreator());
+        User user = userMapper.mapToUser(UserDtoCreator.userDtoCreator());
         //When
         userDao.save(user);
         //Then
-        assertTrue(userDao.findAll().size() == 1);
+        assertTrue(userDao.findAll().size() > 0);
 
     }
 
     @Test
     public void testRemoveUser( ) {
         //Given
-        User user = userMapper.toEntity(UserDtoCreator.userDtoCreator());
-        //When
+        User user = new User();
+        user.setName("John");
+        user.setEmail("email");
+        //Whenn
         userDao.save(user);
-        long id = user.getId();
+        Long id = user.getId();
+       // System.out.println("id = " + id);
         userDao.deleteById(id);
 
         //Then
         assertTrue(userDao.findAll().size() == 0);
+
+        //CleanUp
+        userDao.deleteAll();
     }
 
 }

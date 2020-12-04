@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ToolsGroupRepository extends CrudRepository<ToolsGroup, Long> {
 
-   ToolsGroup findToolsGroupById(long id);
+   ToolsGroup findToolsGroupById(Long id);
 
     @Override
     List<ToolsGroup> findAll();

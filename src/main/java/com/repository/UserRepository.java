@@ -6,15 +6,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Transactional
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    User findUserById(long id);
+    User findUserById(Long id);
     User findUserByEmail(String mail);
-    //User addUser(User user);
 
     List<User> findAll();
 

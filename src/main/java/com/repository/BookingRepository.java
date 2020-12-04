@@ -6,11 +6,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-@Repository
 @Transactional
+@Repository
 public interface BookingRepository extends CrudRepository<Booking, Long> {
+
     @Override
     List<Booking> findAll();
 
-    Booking findBookingsById(long id);
+    Booking findBookingsById(Long id);
 }

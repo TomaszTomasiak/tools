@@ -44,7 +44,7 @@ public class UserMapperTestSuite {
         //Given
 
         //When
-        User user = mapper.toEntity(userDto);
+        User user = mapper.mapToUser(userDto);
 
 
         //Then
@@ -59,7 +59,7 @@ public class UserMapperTestSuite {
         //Given
 
         //When
-        UserDto userDto = mapper.toDto(user);
+        UserDto userDto = mapper.mapToUserDtoList(user);
 
         //Then
         assertNotNull(userDto);
@@ -77,7 +77,7 @@ public class UserMapperTestSuite {
         users.add(user);
 
         //When
-        List<UserDto> usersDtoList = mapper.toDto(users);
+        List<UserDto> usersDtoList = mapper.mapToUserDtoList(users);
 
         //Then
         assertNotNull(usersDtoList);
