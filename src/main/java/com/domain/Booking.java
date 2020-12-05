@@ -13,24 +13,27 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "bookings")
+@Table(name = "BOOKINGS")
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private long id;
 
+    @Column(name = "BOOKED_TO")
+    private LocalDate bookedDateTo;
+
+    @Column(name = "BOOKED_FROM")
+    private LocalDate bookedDateFrom;
+
     @ManyToOne
-    @JoinColumn(name = "tool")
+    @JoinColumn(name = "TOOL_ID")
     private Tool tool;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "USER_ID")
     private User user;
 
-    @Column(name = "from")
-    private LocalDate bookedDateFrom;
 
-    @Column(name = "to")
-    private LocalDate bookedDateTo;
 }
