@@ -35,7 +35,7 @@ public class Tool {
 
     @Builder.Default
     @OneToMany(
-            targetEntity =  Booking.class,
+            targetEntity = Booking.class,
             mappedBy = "tool",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER

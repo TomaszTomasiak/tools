@@ -50,7 +50,7 @@ public class User /*implements Serializable*/ {
 
     @Builder.Default
     @OneToMany(
-            targetEntity =  Booking.class,
+            targetEntity = Booking.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
