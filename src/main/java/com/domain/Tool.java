@@ -33,11 +33,12 @@ public class Tool {
 
 //    private boolean available;
 
+    @Builder.Default
     @OneToMany(
             targetEntity =  Booking.class,
             mappedBy = "tool",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private List<Booking> toolsBookings = new ArrayList<>();
 }

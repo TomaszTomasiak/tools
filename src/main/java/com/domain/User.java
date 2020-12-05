@@ -18,11 +18,11 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User /*implements Serializable*/ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private long id;
 
     @Column(name = "name")
@@ -53,7 +53,7 @@ public class User implements Serializable {
             targetEntity =  Booking.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private List<Booking> toolsBookings = new ArrayList<>();
 

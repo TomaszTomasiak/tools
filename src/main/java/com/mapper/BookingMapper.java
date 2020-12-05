@@ -23,19 +23,20 @@ public class BookingMapper {
     public Booking mapToBookings(final BookingDto dto) {
         return new Booking(
                 dto.getId(),
-                toolRepository.findToolById(dto.getToolId()),
-                userRepository.findUserById(dto.getUserId()),
                 dto.getBookedDateFrom(),
-                dto.getBookedDateTo());
+                dto.getBookedDateTo(),
+                toolRepository.findToolById(dto.getToolId()),
+                userRepository.findUserById(dto.getUserId()));
     }
 
     public BookingDto mapToDto(final Booking booking) {
         return new BookingDto(
                 booking.getId(),
-                booking.getTool().getId(),
-                booking.getUser().getId(),
                 booking.getBookedDateFrom(),
-                booking.getBookedDateTo());
+                booking.getBookedDateTo(),
+                booking.getTool().getId(),
+                booking.getUser().getId()
+                );
     }
 
     public List<BookingDto> mapToDtoList(final List<Booking> list) {

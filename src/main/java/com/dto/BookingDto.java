@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Builder
 public class BookingDto {
     private long id;
-    private long toolId;
-    private long userId;
     private LocalDate bookedDateFrom;
     private LocalDate bookedDateTo;
+    private long toolId;
+    private long userId;
 }
