@@ -53,24 +53,24 @@ public class BookingDaoTestSuite {
         toolRepository.save(tool);
 
         Booking booking = new Booking();
-        booking.setId(1L);
         booking.setUser(user);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
 
-        //When
+                //When
         dao.save(booking);
 
         Long id = booking.getId();
 
         //Then
         assertTrue(dao.count() > 0);
-        assertNotEquals(0, dao.findAll().size());
         assertEquals(LocalDate.of(2020, 10, 25), booking.getBookedDateTo());
 
         //CleanUp
-        //dao.deleteAll();
+//        dao.deleteAll();
+//        userRepository.deleteAll();
+//        toolRepository.deleteAll();
     }
 
 }
