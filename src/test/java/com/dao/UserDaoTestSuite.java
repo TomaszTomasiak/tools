@@ -62,12 +62,13 @@ public class UserDaoTestSuite {
         user.setEmail("email");
         //Whenn
         userDao.save(user);
+        int number = userDao.findAll().size();
         Long id = user.getId();
        // System.out.println("id = " + id);
         userDao.deleteById(id);
 
         //Then
-        assertTrue(userDao.findAll().size() == 0);
+        assertEquals(userDao.findAll().size(), number - 1);
 
         //CleanUp
         userDao.deleteAll();
