@@ -17,7 +17,7 @@ public class UserCreator {
     public static String PESEL = "123456789";
     public static String UPDATED_PESEL = "987654321";
 
-    public static User userDtoCreator() {
+    public static User userCreator() {
         return User.builder()
 //                .id(USER_ID)
                 .name(FIRST_NAME)
@@ -29,7 +29,7 @@ public class UserCreator {
                 .build();
     }
 
-    public static User updatedUserDtoCreator() {
+    public static User updatedUserCreator() {
         return User.builder()
 //                .id(UPDATED_USER_ID)
                 .name(UPDATED_NAME)

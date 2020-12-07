@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.domain.User;
 import com.dto.BookingDto;
 import com.google.gson.Gson;
 import com.resourcesData.BookingDtoCreator;
+import com.resourcesData.UserCreator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
@@ -59,9 +61,9 @@ public class BookingControllerTestSuite {
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", hasSize(1)))
 //                .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].userId", is(bookingDto.getUserId())))
+                .andExpect(jsonPath("$[0].user", is(bookingDto.getUserId())))
                 .andExpect(jsonPath("$[0].bookedDateFrom", is(bookingDto.getBookedDateFrom())))
-                .andExpect(jsonPath("$[0].toolId", is(bookingDto.getToolId())));
+                .andExpect(jsonPath("$[0].tool", is(bookingDto.getToolId())));
     }
 
     @Test
@@ -74,8 +76,8 @@ public class BookingControllerTestSuite {
         //When & Then
         mockMvc.perform(get("/api/v1/bookings/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.toolId", is(bookingDto.getToolId())))
-                .andExpect(jsonPath("$.userId", is(bookingDto.getUserId())))
+                .andExpect(jsonPath("$.tool", is(bookingDto.getToolId())))
+                .andExpect(jsonPath("$.user", is(bookingDto.getUserId())))
                 .andExpect(jsonPath("$.bookedDateTo", is(bookingDto.getBookedDateTo())));
     }
 
@@ -111,7 +113,7 @@ public class BookingControllerTestSuite {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
 //                .andExpect(jsonPath("$.id", is(87)))
-                .andExpect(jsonPath("$.userId", is(updatedBookingDto.getUserId())))
+//                .andExpect(jsonPath("$.user", is(updatedBookingDto.getUserId())))
                 .andExpect(jsonPath("$.bookedDateFrom", is(updatedBookingDto.getBookedDateFrom())));
     }
 
@@ -119,6 +121,8 @@ public class BookingControllerTestSuite {
     public void shouldCreateBooking() throws Exception {
         //Given
         BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
+        User user = UserCreator.userCreator();
+        bookingDto.setUserId(user.getId());
         when(controller.createBooking(ArgumentMatchers.any(BookingDto.class))).thenReturn(bookingDto);
 
         Gson gson = new Gson();
@@ -131,7 +135,7 @@ public class BookingControllerTestSuite {
                 .content(jsonContent))
                 .andExpect(status().isOk())
                 //.andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.userId", is(bookingDto.getUserId())))
+                .andExpect(jsonPath("$.user", is(bookingDto.getUserId())))
                 .andExpect(jsonPath("$.bookedDateFrom", is(bookingDto.getBookedDateFrom())));
     }
 

@@ -41,7 +41,7 @@ public class BookingDaoTestSuite {
     public void testBookingDaoSave() {
         //Given
 
-        User user = UserCreator.userDtoCreator();
+        User user = UserCreator.userCreator();
         userRepository.save(user);
 
         ToolsGroup toolsGroup = new ToolsGroup();

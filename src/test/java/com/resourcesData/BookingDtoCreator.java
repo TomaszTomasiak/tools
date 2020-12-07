@@ -1,14 +1,19 @@
 package com.resourcesData;
 
+import com.domain.Tool;
+import com.domain.User;
 import com.dto.BookingDto;
 
 import java.time.LocalDate;
 
 public class BookingDtoCreator {
 
+    private static final User user = UserCreator.userCreator();
+    private static final Tool tool = ToolCreator.toolCreator();
+
     public static final long ID = 5L;
-    public static final long TOOL_ID = 1L;
-    public static final long USER_ID = 1L;
+    public static final long TOOL_ID = tool.getId();
+    public static final long USER_ID = user.getId();
     public static final LocalDate BOOKED_DATE_FROM = LocalDate.of(2020, 06, 14);
     public static final LocalDate BOOKED_DATE_TO = LocalDate.of(2020, 06, 22);
 
@@ -21,8 +26,8 @@ public class BookingDtoCreator {
     public static BookingDto bookingDtoCreator() {
         return BookingDto.builder()
                 //.id(ID)
-                .toolId(TOOL_ID)
-                .userId(USER_ID)
+//                .toolId(TOOL_ID)
+//                .userId(USER_ID)
                 .bookedDateFrom(BOOKED_DATE_FROM)
                 .bookedDateFrom(BOOKED_DATE_TO)
                 .build();
