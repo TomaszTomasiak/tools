@@ -1,10 +1,16 @@
 package com.controller;
 
+import com.domain.Tool;
+import com.domain.ToolsGroup;
 import com.domain.User;
 import com.dto.BookingDto;
 import com.google.gson.Gson;
+import com.repository.ToolRepository;
+import com.repository.ToolsGroupRepository;
+import com.repository.UserRepository;
 import com.resourcesData.BookingDtoCreator;
 import com.resourcesData.UserCreator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
@@ -36,6 +42,46 @@ public class BookingControllerTestSuite {
     @MockBean
     private BookingController controller;
 
+
+    private UserRepository userRep;
+    private ToolRepository toolRep;
+    private ToolsGroupRepository groupRepository;
+
+
+    private ToolsGroup toolsGroup;
+    private Tool tool;
+    private User user;
+
+    private BookingDto bookingDto;
+
+
+    @Before
+    public void init() {
+        toolsGroup = new ToolsGroup();
+        toolsGroup.setName("ogrodnicze");
+        groupRepository.save(toolsGroup);
+
+        tool = new Tool();
+        tool.setGroupId(toolsGroup);
+        tool.setName("miotła");
+        tool.setProducer("Fiskars");
+        tool.setModel("XTB23");
+        toolRep.save(tool);
+
+        user = new User();
+        user.setName("Jan");
+        user.setSurname("Niezb");
+        user.setEmail("Jan@g.com");
+        user.setPhone("1111111112");
+        user.setPesel("854002552");
+        user.setPassword("pasoswrd");
+        userRep.save(user);
+
+        bookingDto = BookingDtoCreator.bookingDtoCreator();
+        bookingDto.setUserId(user.getId());
+        bookingDto.setToolId(tool.getId());
+    }
+
     @Test
     public void schouldFetchEmptyListOfBookings() throws Exception {
         //Given
@@ -51,7 +97,6 @@ public class BookingControllerTestSuite {
     @Test
     public void schouldFetchNotEmptyListOfBookings() throws Exception {
         //Given
-        BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
         List<BookingDto> bookingDtos = new ArrayList<>();
         bookingDtos.add(bookingDto);
         when(controller.getAllBookings()).thenReturn(bookingDtos);
@@ -69,7 +114,6 @@ public class BookingControllerTestSuite {
     @Test
     public void shouldGetBookingWithIndicatedId() throws Exception {
         //Given
-        BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
         long id = bookingDto.getId();
         when(controller.getBooking(id)).thenReturn(bookingDto);
 
@@ -121,20 +165,17 @@ public class BookingControllerTestSuite {
     public void shouldCreateBooking() throws Exception {
         //Given
         BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
-        User user = UserCreator.userCreator();
-        bookingDto.setUserId(user.getId());
         when(controller.createBooking(ArgumentMatchers.any(BookingDto.class))).thenReturn(bookingDto);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(bookingDto);
 
         //When & Then
-        mockMvc.perform(post("/api/v1/bookings")
+        mockMvc.perform(post("/api/v1/bookings/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
-                //.andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.user", is(bookingDto.getUserId())))
                 .andExpect(jsonPath("$.bookedDateFrom", is(bookingDto.getBookedDateFrom())));
     }
