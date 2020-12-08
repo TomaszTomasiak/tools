@@ -35,14 +35,14 @@ public class BookingController {
         return mapper.mapToDto(service.getBooking(id).orElseThrow(NotFoundException::new));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public BookingDto createBooking(@RequestBody BookingDto dto) {
         log.debug("REST request to add new booking: {}", dto);
         service.saveBookings(mapper.mapToBookings(dto));
         return dto;
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public BookingDto updateBookingById(@PathVariable("id") long id, @RequestBody BookingDto dto) {
         log.debug("REST request to update booking with id: {}", id);
         return mapper.mapToDto(service.saveBookings(mapper.mapToBookings(dto)));
