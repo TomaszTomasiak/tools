@@ -121,16 +121,16 @@ public class BookingControllerTestSuite {
     @Test
     public void shouldGetBookingWithIndicatedId() throws Exception {
         //Given
-        long id = bookingDto.getId();
+        int id = (int) bookingDto.getId();
         when(controller.getBooking(id)).thenReturn(bookingDto);
 
         //When & Then
         mockMvc.perform(get("/api/v1/bookings/" + id)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.toolId", is(bookingDto.getToolId())))
-                .andExpect(jsonPath("$.userId", is(bookingDto.getUserId())))
-                .andExpect(jsonPath("$.bookedDateTo", is(bookingDto.getBookedDateTo())));
+                .andExpect(jsonPath("$.toolId", is(1)))
+                .andExpect(jsonPath("$.userId", is(1)))
+                .andExpect(jsonPath("$.bookedDateTo", is("2020-06-22")));
     }
 
     @Test
