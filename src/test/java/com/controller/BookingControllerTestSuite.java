@@ -20,6 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,43 +44,49 @@ public class BookingControllerTestSuite {
     private BookingController controller;
 
 
-    private UserRepository userRep;
-    private ToolRepository toolRep;
-    private ToolsGroupRepository groupRepository;
-
-
-    private ToolsGroup toolsGroup;
-    private Tool tool;
-    private User user;
-
+//    @Autowired
+//    UserRepository userRep;
+//
+//    @Autowired
+//    ToolRepository toolRep;
+//
+//    @Autowired
+//    ToolsGroupRepository groupRepository;
+//
+//
+//    private ToolsGroup toolsGroup;
+//    private Tool tool;
+//    private User user;
+//
     private BookingDto bookingDto;
 
 
     @Before
     public void init() {
-        toolsGroup = new ToolsGroup();
-        toolsGroup.setName("ogrodnicze");
-        groupRepository.save(toolsGroup);
-
-        tool = new Tool();
-        tool.setGroupId(toolsGroup);
-        tool.setName("miotła");
-        tool.setProducer("Fiskars");
-        tool.setModel("XTB23");
-        toolRep.save(tool);
-
-        user = new User();
-        user.setName("Jan");
-        user.setSurname("Niezb");
-        user.setEmail("Jan@g.com");
-        user.setPhone("1111111112");
-        user.setPesel("854002552");
-        user.setPassword("pasoswrd");
-        userRep.save(user);
+//        toolsGroup = new ToolsGroup();
+//        toolsGroup.setName("ogrodnicze");
+//        groupRepository.save(toolsGroup);
+//
+//        tool = new Tool();
+//        tool.setGroupId(toolsGroup);
+//        tool.setName("miotła");
+//        tool.setProducer("Fiskars");
+//        tool.setModel("XTB23");
+//        toolRep.save(tool);
+//
+//        user = new User();
+//        user.setName("Jan");
+//        user.setSurname("Niezb");
+//        user.setEmail("Jan@g.com");
+//        user.setPhone("1111111112");
+//        user.setPesel("854002552");
+//        user.setPassword("pasoswrd");
+//        userRep.save(user);
 
         bookingDto = BookingDtoCreator.bookingDtoCreator();
-        bookingDto.setUserId(user.getId());
-        bookingDto.setToolId(tool.getId());
+        bookingDto.setId(1L);
+        bookingDto.setUserId(1L);
+        bookingDto.setToolId(1L);
     }
 
     @Test
@@ -105,10 +112,10 @@ public class BookingControllerTestSuite {
         mockMvc.perform(get("/api/v1/bookings").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", hasSize(1)))
-//                .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].user", is(bookingDto.getUserId())))
-                .andExpect(jsonPath("$[0].bookedDateFrom", is(bookingDto.getBookedDateFrom())))
-                .andExpect(jsonPath("$[0].tool", is(bookingDto.getToolId())));
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].userId", is(1)))
+                .andExpect(jsonPath("$[0].bookedDateFrom", is("2020-06-14")))
+                .andExpect(jsonPath("$[0].toolId", is(1)));
     }
 
     @Test
@@ -118,10 +125,11 @@ public class BookingControllerTestSuite {
         when(controller.getBooking(id)).thenReturn(bookingDto);
 
         //When & Then
-        mockMvc.perform(get("/api/v1/bookings/" + id).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/bookings/" + id)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.tool", is(bookingDto.getToolId())))
-                .andExpect(jsonPath("$.user", is(bookingDto.getUserId())))
+                .andExpect(jsonPath("$.toolId", is(bookingDto.getToolId())))
+                .andExpect(jsonPath("$.userId", is(bookingDto.getUserId())))
                 .andExpect(jsonPath("$.bookedDateTo", is(bookingDto.getBookedDateTo())));
     }
 
