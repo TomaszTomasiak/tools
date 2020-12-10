@@ -20,11 +20,12 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(name = "BOOKED_FROM")
+    private LocalDate bookedDateFrom;
+
     @Column(name = "BOOKED_TO")
     private LocalDate bookedDateTo;
 
-    @Column(name = "BOOKED_FROM")
-    private LocalDate bookedDateFrom;
 
     @ManyToOne
     @JoinColumn(name = "TOOL_ID")

@@ -1,10 +1,12 @@
 package com.controller;
 
+import com.config.LocalDateSerializer;
 import com.domain.Tool;
 import com.domain.ToolsGroup;
 import com.domain.User;
 import com.dto.BookingDto;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.repository.ToolRepository;
 import com.repository.ToolsGroupRepository;
 import com.repository.UserRepository;
@@ -22,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,7 +124,7 @@ public class BookingControllerTestSuite {
     @Test
     public void shouldGetBookingWithIndicatedId() throws Exception {
         //Given
-        int id = (int) bookingDto.getId();
+        long id = bookingDto.getId();
         when(controller.getBooking(id)).thenReturn(bookingDto);
 
         //When & Then
@@ -136,7 +139,6 @@ public class BookingControllerTestSuite {
     @Test
     public void shouldDeleteBooking() throws Exception {
         //Given
-        BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
         List<BookingDto> bookingDtos = new ArrayList<>();
         bookingDtos.add(bookingDto);
         when(controller.getAllBookings()).thenReturn(bookingDtos);
@@ -150,48 +152,53 @@ public class BookingControllerTestSuite {
     @Test
     public void schouldUpdateBooking() throws Exception {
         //Given
-        BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
+
         List<BookingDto> bookingDtos = new ArrayList<>();
         bookingDtos.add(bookingDto);
         BookingDto updatedBookingDto = BookingDtoCreator.updatedBookingDtoCreator();
+        updatedBookingDto.setId(1L);
+        updatedBookingDto.setUserId(2L);
+        updatedBookingDto.setToolId(2L);
+        updatedBookingDto.setBookedDateFrom(LocalDate.of(2019, 11, 22));
         when(controller.updateBookingById(ArgumentMatchers.anyLong(), (ArgumentMatchers.any(BookingDto.class)))).thenReturn(updatedBookingDto);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(updatedBookingDto);
 
         //When & Then
-        mockMvc.perform(put("/api/v1/bookings/" + bookingDto.getId())
+        mockMvc.perform(put("/api/v1/bookings/" + 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-//                .andExpect(jsonPath("$.id", is(87)))
-//                .andExpect(jsonPath("$.user", is(updatedBookingDto.getUserId())))
-                .andExpect(jsonPath("$.bookedDateFrom", is(updatedBookingDto.getBookedDateFrom())));
+//                .andExpect(jsonPath("$.id", is(1)))
+//                .andExpect(jsonPath("$.userId", is(2)))
+                .andExpect(jsonPath("$.bookedDateFrom", is("2019-11-22")));
     }
 
     @Test
     public void shouldCreateBooking() throws Exception {
-        //Given
-        BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
+
+
         when(controller.createBooking(ArgumentMatchers.any(BookingDto.class))).thenReturn(bookingDto);
 
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        Gson gson = gsonBuilder.create();
         String jsonContent = gson.toJson(bookingDto);
 
         //When & Then
-        mockMvc.perform(post("/api/v1/bookings/")
+        mockMvc.perform(post("/api/v1/bookings")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.user", is(bookingDto.getUserId())))
-                .andExpect(jsonPath("$.bookedDateFrom", is(bookingDto.getBookedDateFrom())));
+                .andExpect(jsonPath("$.userId", is(1)))
+                .andExpect(jsonPath("$.bookedDateFrom", is("2020-06-14")));
     }
 
     @Test
     public void shouldNotCreateBookingBecauseToolWithIdAlreadyExists() throws Exception {
-        BookingDto bookingDto = BookingDtoCreator.bookingDtoCreator();
-        bookingDto.setId(1L);
+
 
         when(controller.createBooking(ArgumentMatchers.any(BookingDto.class))).thenReturn(bookingDto);
 

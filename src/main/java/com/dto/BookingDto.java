@@ -1,5 +1,8 @@
 package com.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +15,14 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class BookingDto {
-    private long id;
+    private Long id;
+
+    @JsonSerialize(using = ToStringSerializer.class)
     private LocalDate bookedDateFrom;
+
+    @JsonSerialize(using = ToStringSerializer.class)
     private LocalDate bookedDateTo;
-    private long toolId;
-    private long userId;
+
+    private Long toolId;
+    private Long userId;
 }
