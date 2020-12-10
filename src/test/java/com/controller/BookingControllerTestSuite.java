@@ -1,17 +1,10 @@
 package com.controller;
 
 import com.config.LocalDateSerializer;
-import com.domain.Tool;
-import com.domain.ToolsGroup;
-import com.domain.User;
 import com.dto.BookingDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.repository.ToolRepository;
-import com.repository.ToolsGroupRepository;
-import com.repository.UserRepository;
 import com.resourcesData.BookingDtoCreator;
-import com.resourcesData.UserCreator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,46 +39,10 @@ public class BookingControllerTestSuite {
     @MockBean
     private BookingController controller;
 
-
-//    @Autowired
-//    UserRepository userRep;
-//
-//    @Autowired
-//    ToolRepository toolRep;
-//
-//    @Autowired
-//    ToolsGroupRepository groupRepository;
-//
-//
-//    private ToolsGroup toolsGroup;
-//    private Tool tool;
-//    private User user;
-//
     private BookingDto bookingDto;
-
 
     @Before
     public void init() {
-//        toolsGroup = new ToolsGroup();
-//        toolsGroup.setName("ogrodnicze");
-//        groupRepository.save(toolsGroup);
-//
-//        tool = new Tool();
-//        tool.setGroupId(toolsGroup);
-//        tool.setName("miotła");
-//        tool.setProducer("Fiskars");
-//        tool.setModel("XTB23");
-//        toolRep.save(tool);
-//
-//        user = new User();
-//        user.setName("Jan");
-//        user.setSurname("Niezb");
-//        user.setEmail("Jan@g.com");
-//        user.setPhone("1111111112");
-//        user.setPesel("854002552");
-//        user.setPassword("pasoswrd");
-//        userRep.save(user);
-
         bookingDto = BookingDtoCreator.bookingDtoCreator();
         bookingDto.setId(1L);
         bookingDto.setUserId(1L);
@@ -153,8 +110,6 @@ public class BookingControllerTestSuite {
     public void schouldUpdateBooking() throws Exception {
         //Given
 
-        List<BookingDto> bookingDtos = new ArrayList<>();
-        bookingDtos.add(bookingDto);
         BookingDto updatedBookingDto = BookingDtoCreator.updatedBookingDtoCreator();
         updatedBookingDto.setId(1L);
         updatedBookingDto.setUserId(2L);
@@ -162,7 +117,9 @@ public class BookingControllerTestSuite {
         updatedBookingDto.setBookedDateFrom(LocalDate.of(2019, 11, 22));
         when(controller.updateBookingById(ArgumentMatchers.anyLong(), (ArgumentMatchers.any(BookingDto.class)))).thenReturn(updatedBookingDto);
 
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        Gson gson = gsonBuilder.create();
         String jsonContent = gson.toJson(updatedBookingDto);
 
         //When & Then
@@ -170,8 +127,8 @@ public class BookingControllerTestSuite {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-//                .andExpect(jsonPath("$.id", is(1)))
-//                .andExpect(jsonPath("$.userId", is(2)))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.userId", is(2)))
                 .andExpect(jsonPath("$.bookedDateFrom", is("2019-11-22")));
     }
 
