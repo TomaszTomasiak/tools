@@ -55,7 +55,7 @@ public class UserDaoTestSuite {
     }
 
     @Test
-    public void testRemoveUser( ) {
+    public void testRemoveUser() {
         //Given
         User user = new User();
         user.setName("John");
@@ -71,7 +71,19 @@ public class UserDaoTestSuite {
         assertEquals(userDao.findAll().size(), number - 1);
 
         //CleanUp
-        userDao.deleteAll();
+//        userDao.deleteAll();
+    }
+
+    @Test
+    public void testFindUserById() {
+        //Given
+        User user = userMapper.mapToUser(UserDtoCreator.userDtoCreator());
+        //When
+        userDao.save(user);
+        long id = user.getId();
+        //Then
+        assertTrue(userDao.findAll().size() > 0);
+        assertEquals(1, id);
     }
 
 }
