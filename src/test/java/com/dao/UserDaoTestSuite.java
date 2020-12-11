@@ -85,5 +85,4 @@ public class UserDaoTestSuite {
         assertTrue(userDao.findAll().size() > 0);
         assertEquals(1, id);
     }
-
 }
