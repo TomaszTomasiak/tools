@@ -71,7 +71,7 @@ public class ToolsGroupDaoTestSuite {
     }
 
     @Test
-    public void testFindUserById() {
+    public void testFindGroupById() {
         //Given
         //When
         repository.save(toolsGroup);
