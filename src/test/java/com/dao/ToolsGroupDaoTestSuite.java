@@ -22,7 +22,6 @@ public class ToolsGroupDaoTestSuite {
     @Before
     public void init() {
         toolsGroup = new ToolsGroup();
-        toolsGroup.setId(1);
         toolsGroup.setName("budowlane");
     }
 
@@ -77,7 +76,7 @@ public class ToolsGroupDaoTestSuite {
         repository.save(toolsGroup);
         long id = toolsGroup.getId();
         //Then
-        assertTrue(repository.findAll().size() > 0);
-        assertEquals(1, id);
+        assertTrue(repository.findById(id).isPresent());
+        assertEquals("budowlane", toolsGroup.getName());
     }
 }

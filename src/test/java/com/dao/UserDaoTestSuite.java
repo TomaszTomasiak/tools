@@ -82,7 +82,7 @@ public class UserDaoTestSuite {
         userDao.save(user);
         long id = user.getId();
         //Then
-        assertTrue(userDao.findAll().size() > 0);
-        assertEquals(1, id);
+        assertEquals("Rambo",userDao.findUserById(id).getSurname());
+        assertEquals("John", user.getName());
     }
 }

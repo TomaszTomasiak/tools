@@ -33,13 +33,13 @@ public class UserServiceTestSuite {
         long numberOfUsersBeforeAddUser = userService.findAll().size();
         //When
         userService.save(user);
-        User testUser = userService.findById(user.getId()).get();
+        long id = user.getId();
+
         long numberOfUsersAfterAddUser = userService.findAll().size();
 
 
         //Then
-        assertNotNull(testUser);
-        assertEquals("John", testUser.getName());
+        assertEquals("John", user.getName());
         assertEquals(1, numberOfUsersAfterAddUser - numberOfUsersBeforeAddUser);
     }
 

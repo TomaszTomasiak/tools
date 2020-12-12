@@ -62,7 +62,7 @@ public class ToolControllerTestSuite {
 //                .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is(toolDto.getName())))
                 .andExpect(jsonPath("$[0].model", is(toolDto.getModel())))
-                .andExpect(jsonPath("$[0].groupId", is(2)));
+                .andExpect(jsonPath("$[0].groupId", is(9)));
     }
 
     @Test
