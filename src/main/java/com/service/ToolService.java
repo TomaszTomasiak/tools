@@ -10,13 +10,13 @@ import java.util.Optional;
 @Transactional
 @Service
 public interface ToolService {
-    public List<Tool> getAllTools();
+    List<Tool> getAllTools();
 
-    public Optional<Tool> getTool(long id);
+    Optional<Tool> getTool(long id);
 
-    public Tool saveTool(Tool tool);
+    Tool saveTool(Tool tool);
 
-    public Tool getToolById(long id);
+    Tool getToolById(long id);
 
-    public void deleteTool(long id);
+    void deleteTool(long id);
 }
