@@ -1,4 +1,4 @@
 package com.domain;
 
-public class Rent {
+public class Order {
 }
