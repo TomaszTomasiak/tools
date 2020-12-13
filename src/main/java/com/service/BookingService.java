@@ -7,13 +7,13 @@ import java.util.Optional;
 
 
 public interface BookingService {
-    public List<Booking> getAllBookings();
+    List<Booking> getAllBookings();
 
-    public Optional<Booking> getBooking(long id);
+    Optional<Booking> getBooking(long id);
 
-    public Booking saveBookings(Booking booking);
+    Booking saveBookings(Booking booking);
 
-    public Booking getBookingById(long id);
+    Booking getBookingById(long id);
 
-    public void deleteBooking(long id);
+    void deleteBooking(long id);
 }
