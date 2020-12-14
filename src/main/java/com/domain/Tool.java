@@ -3,6 +3,7 @@ package com.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,9 @@ public class Tool {
     @ManyToOne
     @JoinColumn(name="groupId")
     private ToolsGroup groupId;
+
+    @Column(name="rate")
+    private BigDecimal rentRate;
 
 //    private boolean available;
 

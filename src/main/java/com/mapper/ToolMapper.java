@@ -15,6 +15,8 @@ public class ToolMapper {
     @Autowired
     private ToolsGroupRepository groupRepository;
 
+
+
     public Tool mapToTool(final ToolDto dto) {
         Tool toolBean = new Tool();
         toolBean.setId(dto.getId());
@@ -22,6 +24,7 @@ public class ToolMapper {
         toolBean.setProducer(dto.getProducer());
         toolBean.setModel(dto.getModel());
         toolBean.setGroupId(groupRepository.findToolsGroupById(dto.getId()));
+        toolBean.setRentRate(dto.getRentRate());
         return toolBean;
     }
 
@@ -32,6 +35,7 @@ public class ToolMapper {
         toolDtoBean.setProducer(tool.getProducer());
         toolDtoBean.setModel(tool.getModel());
         toolDtoBean.setGroupId(tool.getId());
+        toolDtoBean.setRentRate(tool.getRentRate());
         return toolDtoBean;
     }
 
