@@ -1,6 +1,5 @@
 package com.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -24,5 +24,6 @@ public class BookingDto {
     private LocalDate bookedDateTo;
 
     private Long toolId;
-    private Long userId;
+    private Long orderId;
+    private BigDecimal valueOfRent;
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -31,9 +32,13 @@ public class Booking {
     @JoinColumn(name = "TOOL_ID")
     private Tool tool;
 
+//    @ManyToOne
+//    @JoinColumn(name = "USER_ID")
+//    private User user;
+
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 
 
 }
