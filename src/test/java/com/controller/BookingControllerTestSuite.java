@@ -45,7 +45,7 @@ public class BookingControllerTestSuite {
     public void init() {
         bookingDto = BookingDtoCreator.bookingDtoCreator();
         bookingDto.setId(1L);
-        bookingDto.setUserId(1L);
+        bookingDto.setOrderId(1L);
         bookingDto.setToolId(1L);
     }
 
@@ -73,7 +73,7 @@ public class BookingControllerTestSuite {
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].userId", is(1)))
+                .andExpect(jsonPath("$[0].orderId", is(1)))
                 .andExpect(jsonPath("$[0].bookedDateFrom", is("2020-06-14")))
                 .andExpect(jsonPath("$[0].toolId", is(1)));
     }
@@ -89,7 +89,7 @@ public class BookingControllerTestSuite {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.toolId", is(1)))
-                .andExpect(jsonPath("$.userId", is(1)))
+                .andExpect(jsonPath("$.orderId", is(1)))
                 .andExpect(jsonPath("$.bookedDateTo", is("2020-06-22")));
     }
 
@@ -112,7 +112,7 @@ public class BookingControllerTestSuite {
 
         BookingDto updatedBookingDto = BookingDtoCreator.updatedBookingDtoCreator();
         updatedBookingDto.setId(1L);
-        updatedBookingDto.setUserId(2L);
+        updatedBookingDto.setOrderId(2L);
         updatedBookingDto.setToolId(2L);
         updatedBookingDto.setBookedDateFrom(LocalDate.of(2019, 11, 22));
         when(controller.updateBookingById(ArgumentMatchers.anyLong(), (ArgumentMatchers.any(BookingDto.class)))).thenReturn(updatedBookingDto);
@@ -128,7 +128,7 @@ public class BookingControllerTestSuite {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.userId", is(2)))
+                .andExpect(jsonPath("$.orderId", is(2)))
                 .andExpect(jsonPath("$.bookedDateFrom", is("2019-11-22")));
     }
 
@@ -149,7 +149,7 @@ public class BookingControllerTestSuite {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId", is(1)))
+                .andExpect(jsonPath("$.orderId", is(1)))
                 .andExpect(jsonPath("$.bookedDateFrom", is("2020-06-14")));
     }
 

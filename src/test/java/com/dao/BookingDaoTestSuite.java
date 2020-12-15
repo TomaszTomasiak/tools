@@ -1,14 +1,7 @@
 package com.dao;
 
-import com.domain.Booking;
-import com.domain.Tool;
-import com.domain.ToolsGroup;
-import com.domain.User;
-import com.mapper.BookingMapper;
-import com.repository.BookingRepository;
-import com.repository.ToolRepository;
-import com.repository.ToolsGroupRepository;
-import com.repository.UserRepository;
+import com.domain.*;
+import com.repository.*;
 import com.resourcesData.ToolCreator;
 import com.resourcesData.UserCreator;
 import org.junit.Test;
@@ -32,7 +25,7 @@ public class BookingDaoTestSuite {
     ToolRepository toolRepository;
 
     @Autowired
-    UserRepository userRepository;
+    OrderRepository orderRepository;
 
     @Autowired
     ToolsGroupRepository groupRepository;
@@ -41,8 +34,8 @@ public class BookingDaoTestSuite {
     public void testBookingDaoSave() {
         //Given
 
-        User user = UserCreator.userCreator();
-        userRepository.save(user);
+        Order order = new Order();
+        orderRepository.save(order);
 
         ToolsGroup toolsGroup = new ToolsGroup();
         toolsGroup.setName("name");
@@ -53,7 +46,7 @@ public class BookingDaoTestSuite {
         toolRepository.save(tool);
 
         Booking booking = new Booking();
-        booking.setUser(user);
+        booking.setOrder(order);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
