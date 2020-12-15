@@ -25,7 +25,7 @@ public class OrderController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping
-    public List<OrderDto> getAllOrderss() {
+    public List<OrderDto> getAllOrders() {
         log.debug("REST request to get all orders");
         return mapper.mapToDtoList(service.getAllOrders());
     }
