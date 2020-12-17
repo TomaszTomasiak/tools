@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrdersOfUser(User user) {
+    public List<Order> getAllOrdersOfUser(long userId) {
         return null;
     }
 }

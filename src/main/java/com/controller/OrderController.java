@@ -22,6 +22,7 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl service;
 
+
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping
@@ -55,5 +56,9 @@ public class OrderController {
         service.deleteOrder(id);
     }
 
-
+    @GetMapping("/ordersOfUser/{id}")
+    public List<OrderDto> getAllUserOrders(@PathVariable("id") long userId) throws NotFoundException {
+        log.debug("REST request to get all orders of user with id: {}", userId);
+        return mapper.mapToDtoList(service.getAllOrdersOfUser(userId));
+    }
 }
