@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,5 +20,7 @@ public class OrderDto {
 
     @Builder.Default
     private List<Booking> bookings = new ArrayList<>();
+
+    private BigDecimal totalCost;
 }
 
