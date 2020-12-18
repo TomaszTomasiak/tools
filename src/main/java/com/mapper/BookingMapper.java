@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +21,6 @@ public class BookingMapper {
 
     @Autowired
     private OrderRepository orderRepository;
-
-    private BigDecimal calculateValueForRent(final Booking booking) {
-        return BigDecimal.valueOf(booking.getBookedDateTo().compareTo(booking.getBookedDateFrom())).multiply(booking.getTool().getRentRate());
-    }
-
 
     public Booking mapToBookings(final BookingDto dto) {
         Booking bookingBean = new Booking();
@@ -49,7 +45,6 @@ public class BookingMapper {
         else {
             dtoBean.setOrderId(booking.getOrder().getId());
         }
-        dtoBean.setValueOfRent(calculateValueForRent(booking));
         return dtoBean;
     }
 
