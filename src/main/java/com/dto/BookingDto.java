@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -25,5 +24,5 @@ public class BookingDto {
 
     private Long toolId;
     private Long orderId;
-    private BigDecimal valueOfRent;
+
 }
