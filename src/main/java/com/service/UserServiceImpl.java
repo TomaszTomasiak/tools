@@ -1,6 +1,8 @@
 package com.service;
 
 import com.domain.User;
+import com.exception.EmailExistsException;
+import com.exception.PeselExistException;
 import com.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +23,15 @@ public class UserServiceImpl implements UserService{
     private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public User save(final User user) {
+    public User save(final User user) throws EmailExistsException, PeselExistException {
         log.debug("Request to save User : {}", user);
+        if (checkEmailExists(user.getEmail())) {
+            throw new EmailExistsException("There is an account with that email adress: " + user.getEmail());
+        }
+        if (checkPeselExists(user.getPesel())) {
+            throw new PeselExistException("There is account with pesel: " + user.getPesel());
+        }
+
         return userRepository.save(user);
     }
 
@@ -51,19 +60,9 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteAll();
     }
 
-
     public User getUserByEmail(String mail) {
         return userRepository.findUserByEmail(mail);
     }
-
-
-//    public User addUser(User user) throws EmailExistsException {
-//
-//        if (checkEmailExists(user.getEmail())) {
-//            throw new EmailExistsException("There is an account with that email adress: " + user.getEmail());
-//        }
-//        return userRepository.addUser(user);
-//    }
 
 
     @Override
@@ -74,6 +73,17 @@ public class UserServiceImpl implements UserService{
     public boolean checkEmailExists(String email) {
 
         User user = userRepository.findUserByEmail(email);
+
+        if (user != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkPeselExists(String pesel) {
+
+        User user = userRepository.findUserByPesel(pesel);
 
         if (user != null) {
             return true;

@@ -2,6 +2,8 @@ package com.service;
 
 import com.domain.User;
 
+import com.exception.EmailExistsException;
+import com.exception.PeselExistException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Optional;
 @Service
 public interface UserService {
 
-    User save(User user);
+    User save(User user) throws EmailExistsException, PeselExistException;
 
     List<User> findAll();
 
