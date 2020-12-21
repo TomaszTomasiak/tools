@@ -29,11 +29,15 @@ public class Tool {
     private String model;
 
     @ManyToOne
-    @JoinColumn(name="groupId")
+    @JoinColumn(name = "groupId")
     private ToolsGroup group;
 
-    @Column(name="rate")
+    @Column(name = "rate")
     private BigDecimal rentRate;
+
+    @ManyToOne
+    @JoinColumn(name = "locationId")
+    private Location location;
 
 //    private boolean available;
 

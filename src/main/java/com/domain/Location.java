@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,4 +34,11 @@ public class Location {
 
     @Column(name = "phone")
     private String phone;
+
+    @OneToMany(
+            targetEntity = Tool.class,
+            mappedBy = "locationId",
+            fetch = FetchType.LAZY
+    )
+    private List<Tool> toolList = new ArrayList<>();
 }
