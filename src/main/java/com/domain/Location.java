@@ -2,13 +2,12 @@ package com.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "locations")
 public class Location {
     @Id
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "country")
