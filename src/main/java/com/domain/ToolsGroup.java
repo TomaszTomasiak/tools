@@ -22,6 +22,6 @@ public class ToolsGroup {
             mappedBy = "groupId",
             fetch = FetchType.LAZY
     )
-    List<Tool> toolList = new ArrayList<>();
-
+    private List<Tool> toolsList = new ArrayList<>();
 }
+
