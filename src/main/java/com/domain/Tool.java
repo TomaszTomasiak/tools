@@ -30,7 +30,7 @@ public class Tool {
 
     @ManyToOne
     @JoinColumn(name="groupId")
-    private ToolsGroup groupId;
+    private ToolsGroup group;
 
     @Column(name="rate")
     private BigDecimal rentRate;
