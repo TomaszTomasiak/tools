@@ -18,13 +18,16 @@ import java.util.List;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @Column(name = "country")
     private String country;
 
     @Column(name = "city")
     private String city;
+
+    @Column(name = "zip_code")
+    private String zipCode;
 
     @Column(name = "addres")
     private String addres;
