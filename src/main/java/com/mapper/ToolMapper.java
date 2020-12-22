@@ -19,8 +19,6 @@ public class ToolMapper {
     @Autowired
     private LocationRepository locationRepository;
 
-
-
     public Tool mapToTool(final ToolDto dto) {
         Tool toolBean = new Tool();
         toolBean.setId(dto.getId());
