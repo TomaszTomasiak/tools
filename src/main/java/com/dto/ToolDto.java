@@ -18,4 +18,5 @@ public class ToolDto {
     private String model;
     private long groupId;
     private BigDecimal rentRate;
+    private long locationId;
 }

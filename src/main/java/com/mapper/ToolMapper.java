@@ -2,6 +2,7 @@ package com.mapper;
 
 import com.domain.Tool;
 import com.dto.ToolDto;
+import com.repository.LocationRepository;
 import com.repository.ToolsGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,9 @@ public class ToolMapper {
     @Autowired
     private ToolsGroupRepository groupRepository;
 
+    @Autowired
+    private LocationRepository locationRepository;
+
 
 
     public Tool mapToTool(final ToolDto dto) {
@@ -23,8 +27,9 @@ public class ToolMapper {
         toolBean.setName(dto.getName());
         toolBean.setProducer(dto.getProducer());
         toolBean.setModel(dto.getModel());
-        toolBean.setGroupId(groupRepository.findToolsGroupById(dto.getId()));
+        toolBean.setGroup(groupRepository.findToolsGroupById(dto.getId()));
         toolBean.setRentRate(dto.getRentRate());
+        toolBean.setLocation(locationRepository.findLocationById(dto.getLocationId()));
         return toolBean;
     }
 
@@ -36,6 +41,7 @@ public class ToolMapper {
         toolDtoBean.setModel(tool.getModel());
         toolDtoBean.setGroupId(tool.getId());
         toolDtoBean.setRentRate(tool.getRentRate());
+        toolDtoBean.setLocationId(tool.getLocation().getId());
         return toolDtoBean;
     }
 
