@@ -12,5 +12,5 @@ import java.util.List;
 public class ToolsGroupDto {
     private long id;
     private String name;
-    List<Tool> toolList;
+    private List<Tool> toolList;
 }
