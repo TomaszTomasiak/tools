@@ -15,7 +15,7 @@ public class ToolsGroupMapper {
     }
 
     public ToolsGroupDto mapToToolsGroupDto(final ToolsGroup group) {
-        return new ToolsGroupDto(group.getId(), group.getName(), group.getToolList());
+        return new ToolsGroupDto(group.getId(), group.getName(), group.getToolsList());
     }
 
     public List<ToolsGroupDto> mapToToolsGroupDtoList(final List<ToolsGroup> list){
