@@ -38,6 +38,7 @@ public class Location {
     @Column(name = "phone")
     private String phone;
 
+    @Builder.Default
     @OneToMany(
             targetEntity = Tool.class,
             mappedBy = "locationId",
