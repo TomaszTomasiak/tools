@@ -9,12 +9,14 @@ public class ToolDtoCreator {
     public static String PRODUCER = "BOSH";
     public static String MODEL = "12LXC78";
     public static long GROUP_ID = 9L;
+    public static long LOCATION_ID = 2L;
 
     public static long UPDATED_ID = 1L;
     public static String UPDATED_NAME = "młot pneumatyczny";
     public static String UPDATED_PRODUCER = "CAT";
     public static String UPDATED_MODEL = "CP4222";
     public static long UPDATED_GROUP_ID = 12L;
+    public static long UPDATED_LOCATION_ID = 3L;
 
     public static ToolDto toolDtoCreator() {
         return ToolDto.builder()
@@ -23,6 +25,7 @@ public class ToolDtoCreator {
                 .producer(PRODUCER)
                 .model(MODEL)
                 .groupId(GROUP_ID)
+                .locationId(LOCATION_ID)
                 .build();
     }
 
@@ -33,6 +36,7 @@ public class ToolDtoCreator {
                 .producer(UPDATED_PRODUCER)
                 .model(UPDATED_MODEL)
                 .groupId(UPDATED_GROUP_ID)
+                .locationId(UPDATED_LOCATION_ID)
                 .build();
     }
 
