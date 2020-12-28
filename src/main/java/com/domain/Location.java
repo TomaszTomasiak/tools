@@ -41,7 +41,7 @@ public class Location {
     @Builder.Default
     @OneToMany(
             targetEntity = Tool.class,
-            mappedBy = "locationId",
+            mappedBy = "location",
             fetch = FetchType.LAZY
     )
     private List<Tool> toolList = new ArrayList<>();
