@@ -19,7 +19,7 @@ public class ToolsGroup {
 
     @OneToMany(
             targetEntity = Tool.class,
-            mappedBy = "groupId",
+            mappedBy = "group",
             fetch = FetchType.LAZY
     )
     private List<Tool> toolsList = new ArrayList<>();
