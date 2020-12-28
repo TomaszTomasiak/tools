@@ -1,6 +1,8 @@
 package com.dao;
+import com.domain.Location;
 import com.domain.Tool;
 import com.domain.ToolsGroup;
+import com.repository.LocationRepository;
 import com.repository.ToolRepository;
 import com.repository.ToolsGroupRepository;
 import org.junit.Before;
@@ -16,18 +18,25 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class ToolDaoTestSuite {
     @Autowired
-    ToolsGroupRepository groupDao;
+    private ToolsGroupRepository groupDao;
 
     @Autowired
-    ToolRepository toolDao;
+    private ToolRepository toolDao;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     private ToolsGroup toolsGroup;
     private Tool tool;
+    private Location location;
 
     @Before
     public void init() {
         toolsGroup = new ToolsGroup();
         toolsGroup.setName("budowlane");
+
+        location = new Location();
+        location.setCity("Warsaw");
 
         tool = new Tool();
         tool.setModel("XYZ123");
@@ -40,7 +49,9 @@ public class ToolDaoTestSuite {
         //Given
         //When
         groupDao.save(toolsGroup);
-        tool.setGroupId(toolsGroup);
+        locationRepository.save(location);
+        tool.setGroup(toolsGroup);
+        tool.setLocation(location);
         toolDao.save(tool);
 
         //Then
@@ -58,7 +69,7 @@ public class ToolDaoTestSuite {
         //Given
         //When
         groupDao.save(toolsGroup);
-        tool.setGroupId(toolsGroup);
+        tool.setGroup(toolsGroup);
         toolDao.save(tool);
         //Then
         assertTrue(toolDao.findAll().size() > 0);
@@ -74,7 +85,7 @@ public class ToolDaoTestSuite {
         //Given
         //When
         groupDao.save(toolsGroup);
-        tool.setGroupId(toolsGroup);
+        tool.setGroup(toolsGroup);
         toolDao.save(tool);
         long id = tool.getId();
         int number = toolDao.findAll().size();
@@ -93,7 +104,7 @@ public class ToolDaoTestSuite {
         //Given
         //When
         groupDao.save(toolsGroup);
-        tool.setGroupId(toolsGroup);
+        tool.setGroup(toolsGroup);
         toolDao.save(tool);
         long id = tool.getId();
         //Then
