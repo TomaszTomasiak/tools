@@ -2,6 +2,7 @@ package com.dao;
 
 import com.domain.*;
 import com.repository.*;
+import com.resourcesData.LocationDtoCreator;
 import com.resourcesData.ToolCreator;
 import com.resourcesData.UserCreator;
 import org.junit.Test;
@@ -30,6 +31,9 @@ public class BookingDaoTestSuite {
     @Autowired
     ToolsGroupRepository groupRepository;
 
+    @Autowired
+    LocationRepository locationRepository;
+
     @Test
     public void testBookingDaoSave() {
         //Given
@@ -41,8 +45,13 @@ public class BookingDaoTestSuite {
         toolsGroup.setName("name");
         groupRepository.save(toolsGroup);
 
+        Location location = new Location();
+        location.setCountry("Russia");
+        locationRepository.save(location);
+
         Tool tool = ToolCreator.toolCreator();
-        tool.setGroupId(toolsGroup);
+        tool.setGroup(toolsGroup);
+        tool.setLocation(location);
         toolRepository.save(tool);
 
         Booking booking = new Booking();
