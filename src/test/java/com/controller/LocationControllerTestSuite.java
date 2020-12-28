@@ -47,15 +47,15 @@ public class LocationControllerTestSuite {
     }
 
     @Test
-    public void schouldFetchNotEmptyListOfLocationss() throws Exception {
+    public void schouldFetchNotEmptyListOfLocations() throws Exception {
         //Given
         LocationDto locationDto = LocationDtoCreator.locationDtoCreator();
-        List<LocationDto> toolDtos = new ArrayList<>();
-        toolDtos.add(locationDto);
-        when(controller.getAllLocations()).thenReturn(toolDtos);
+        List<LocationDto> locationDtos = new ArrayList<>();
+        locationDtos.add(locationDto);
+        when(controller.getAllLocations()).thenReturn(locationDtos);
 
         //When & Then
-        mockMvc.perform(get("/api/v1/Locations").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/locations").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", hasSize(1)))
 //                .andExpect(jsonPath("$[0].id", is(1)))
