@@ -18,7 +18,7 @@ public class LocationDto {
     private String country;
     private String city;
     private String zipCode;
-    private String addres;
+    private String address;
     private String email;
     private String phone;
 

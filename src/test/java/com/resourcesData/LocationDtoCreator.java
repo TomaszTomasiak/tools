@@ -27,7 +27,7 @@ public class LocationDtoCreator {
                 .country(COUNTRY)
                 .city(CITY)
                 .zipCode(ZIPCODE)
-                .addres(ADRESS)
+                .address(ADRESS)
                 .email(EMAIL)
                 .phone(PHONE)
                 .build();
@@ -39,7 +39,7 @@ public class LocationDtoCreator {
                 .country(COUNTRY_UPDATED)
                 .city(CITY_UPDATED)
                 .zipCode(ZIPCODE_UPDATED)
-                .addres(ADRESS_UPDATED)
+                .address(ADRESS_UPDATED)
                 .email(EMAIL_UPDATED)
                 .phone(PHONE_UPDATED)
                 .build();

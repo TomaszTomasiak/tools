@@ -15,7 +15,5 @@ import java.util.List;
 public class ToolsGroupDto {
     private long id;
     private String name;
-
-    @Builder.Default
-    private List<Tool> toolList = new ArrayList<>();
+    private List<Tool> toolList;
 }
