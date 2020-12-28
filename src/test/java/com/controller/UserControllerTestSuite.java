@@ -1,6 +1,8 @@
 package com.controller;
 
 import com.dto.UserDto;
+import com.exception.EmailExistsException;
+import com.exception.PeselExistException;
 import com.google.gson.Gson;
 
 import com.resourcesData.UserDtoCreator;
@@ -101,7 +103,7 @@ public class UserControllerTestSuite {
 
     @Test
     @WithMockUser(username="admin",roles={"USER","ADMIN"})
-    public void schouldUpdateUser() throws Exception {
+    public void schouldUpdateUser() throws Exception, EmailExistsException, PeselExistException {
         //Given
         UserDto userDto = UserDtoCreator.userDtoCreator();
         List<UserDto> userDtos = new ArrayList<>();
@@ -124,7 +126,7 @@ public class UserControllerTestSuite {
 
     @Test
     @WithMockUser(username="admin",roles={"USER","ADMIN"})
-    public void shouldCreateUser() throws Exception {
+    public void shouldCreateUser() throws Exception, EmailExistsException, PeselExistException {
         //Given
         UserDto userDto = new UserDto();
         //userDto.setId(1L);
@@ -149,7 +151,7 @@ public class UserControllerTestSuite {
 
     @Test
     @WithMockUser(username="admin",roles={"USER","ADMIN"})
-    public void shouldNotCreateUserBecauseUserWithIdAlreadyExists() throws Exception {
+    public void shouldNotCreateUserBecauseUserWithIdAlreadyExists() throws Exception, EmailExistsException, PeselExistException {
         UserDto userDto = UserDtoCreator.userDtoCreator();
         userDto.setId(9L);
 

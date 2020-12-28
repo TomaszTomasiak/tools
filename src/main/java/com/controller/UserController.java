@@ -1,7 +1,9 @@
 package com.controller;
 
 import com.dto.UserDto;
+import com.exception.EmailExistsException;
 import com.exception.NotFoundException;
+import com.exception.PeselExistException;
 import com.mapper.UserMapper;
 import com.service.UserServiceImpl;
 import org.slf4j.Logger;
@@ -39,14 +41,14 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto createUser(@RequestBody UserDto userDto) {
+    public UserDto createUser(@RequestBody UserDto userDto) throws EmailExistsException, PeselExistException {
         log.debug("REST request to add new user: {}", userDto);
         service.save(mapper.mapToUser(userDto));
         return userDto;
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto updateUserById(@PathVariable("id") long id, @RequestBody UserDto userDto) {
+    public UserDto updateUserById(@PathVariable("id") long id, @RequestBody UserDto userDto) throws EmailExistsException, PeselExistException {
         log.debug("REST request to update user with id: {}", id);
         return mapper.mapToUserDtoList(service.save(mapper.mapToUser(userDto)));
     }

@@ -2,7 +2,9 @@ package com.sevice;
 
 
 import com.domain.User;
+import com.exception.EmailExistsException;
 import com.exception.NotFoundException;
+import com.exception.PeselExistException;
 import com.service.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +30,7 @@ public class UserServiceTestSuite {
             .build();
 
     @Test
-    public void testSaveAndGetUser() {
+    public void testSaveAndGetUser() throws EmailExistsException, PeselExistException {
         //Given
         long numberOfUsersBeforeAddUser = userService.findAll().size();
         //When
@@ -44,10 +46,12 @@ public class UserServiceTestSuite {
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteUser() throws EmailExistsException, PeselExistException {
         //Given
 
         User newUser = user;
+        user.setEmail("new@email.com");
+        user.setPesel("999999999");
         //When
         userService.save(newUser);
         long id = newUser.getId();
@@ -59,13 +63,14 @@ public class UserServiceTestSuite {
     }
 
     @Test
-    public void testReturnUserById() throws NotFoundException {
+    public void testReturnUserById() throws NotFoundException, EmailExistsException, PeselExistException {
         //Given
         User userNew = User.builder()
                 .name("Maryla")
                 .surname("Rodowicz")
                 .email("test@mail.com")
                 .password("password2")
+                .pesel("1234567890")
                 .phone("222222222")
                 .build();
 
