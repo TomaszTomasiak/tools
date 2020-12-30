@@ -5,6 +5,7 @@ import com.repository.*;
 import com.resourcesData.LocationDtoCreator;
 import com.resourcesData.ToolCreator;
 import com.resourcesData.UserCreator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,47 +21,52 @@ import static org.junit.Assert.*;
 public class BookingDaoTestSuite {
 
     @Autowired
-    BookingRepository dao;
+    private BookingRepository dao;
 
     @Autowired
-    ToolRepository toolRepository;
+    private ToolRepository toolRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    ToolsGroupRepository groupRepository;
+    private ToolsGroupRepository groupRepository;
 
     @Autowired
-    LocationRepository locationRepository;
+    private LocationRepository locationRepository;
 
-    @Test
-    public void testBookingDaoSave() {
-        //Given
+    private Order order;
+    private Tool tool;
+    private ToolsGroup group;
+    private Booking booking;
+    private Location location;
 
-        Order order = new Order();
-        orderRepository.save(order);
-
-        ToolsGroup toolsGroup = new ToolsGroup();
-        toolsGroup.setName("name");
-        groupRepository.save(toolsGroup);
-
-        Location location = new Location();
+    @Before
+    public void init() {
+        order = new Order();
+        group = new ToolsGroup();
+        group.setName("name");
+        location = new Location();
         location.setCountry("Russia");
-        locationRepository.save(location);
-
-        Tool tool = ToolCreator.toolCreator();
-        tool.setGroup(toolsGroup);
+        tool = ToolCreator.toolCreator();
+        tool.setGroup(group);
         tool.setLocation(location);
-        toolRepository.save(tool);
-
-        Booking booking = new Booking();
+        booking = new Booking();
         booking.setOrder(order);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
+    }
 
-                //When
+    @Test
+    public void testBookingDaoSave() {
+        //Given
+        orderRepository.save(order);
+        groupRepository.save(group);
+        locationRepository.save(location);
+        toolRepository.save(tool);
+
+        //When
         dao.save(booking);
 
         Long id = booking.getId();
@@ -70,9 +76,11 @@ public class BookingDaoTestSuite {
         assertEquals(LocalDate.of(2020, 10, 25), booking.getBookedDateTo());
 
         //CleanUp
-//        dao.deleteAll();
-//        userRepository.deleteAll();
-//        toolRepository.deleteAll();
+        dao.deleteAll();
+        toolRepository.deleteAll();
+        orderRepository.deleteAll();
+        groupRepository.deleteAll();
+        locationRepository.deleteAll();
     }
 
 }
