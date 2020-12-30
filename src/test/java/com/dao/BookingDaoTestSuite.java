@@ -2,9 +2,7 @@ package com.dao;
 
 import com.domain.*;
 import com.repository.*;
-import com.resourcesData.LocationDtoCreator;
 import com.resourcesData.ToolCreator;
-import com.resourcesData.UserCreator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,6 +56,14 @@ public class BookingDaoTestSuite {
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
     }
 
+    private void cleanUp() {
+        dao.deleteAll();
+        toolRepository.deleteAll();
+        orderRepository.deleteAll();
+        groupRepository.deleteAll();
+        locationRepository.deleteAll();
+    }
+
     @Test
     public void testBookingDaoSave() {
         //Given
@@ -68,7 +74,6 @@ public class BookingDaoTestSuite {
 
         //When
         dao.save(booking);
-
         Long id = booking.getId();
 
         //Then
@@ -76,11 +81,66 @@ public class BookingDaoTestSuite {
         assertEquals(LocalDate.of(2020, 10, 25), booking.getBookedDateTo());
 
         //CleanUp
-        dao.deleteAll();
-        toolRepository.deleteAll();
-        orderRepository.deleteAll();
-        groupRepository.deleteAll();
-        locationRepository.deleteAll();
+        cleanUp();
     }
 
+    @Test
+    public void testFindAllBookings() {
+        //Given
+        orderRepository.save(order);
+        groupRepository.save(group);
+        locationRepository.save(location);
+        toolRepository.save(tool);
+
+        //When
+        dao.save(booking);
+
+        //Then
+        assertTrue(dao.findAll().size() > 0);
+
+        //CleanUp
+        cleanUp();
+    }
+
+    @Test
+    public void testRemoveBooking() {
+
+        //Given
+        orderRepository.save(order);
+        groupRepository.save(group);
+        locationRepository.save(location);
+        toolRepository.save(tool);
+
+        //When
+        dao.save(booking);
+        long id = booking.getId();
+        int number = dao.findAll().size();
+        dao.deleteById(id);
+
+        //Then
+        assertEquals(0, number - 1);
+
+        //CleanUp
+        cleanUp();
+    }
+
+    @Test
+    public void testFindBookingById() {
+        //Given
+        orderRepository.save(order);
+        groupRepository.save(group);
+        locationRepository.save(location);
+        toolRepository.save(tool);
+
+        //When
+        dao.save(booking);
+        long id = booking.getId();
+
+        //Then
+        assertTrue(dao.findAll().size() > 0);
+        assertEquals(LocalDate.of(2020, 10, 11), dao.findBookingsById(id).getBookedDateFrom());
+
+        //CleanUp
+        cleanUp();
+    }
 }
