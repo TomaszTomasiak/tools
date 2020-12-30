@@ -56,7 +56,7 @@ public class ToolDaoTestSuite {
 
         //Then
         assertTrue(toolDao.count() > 0);
-        assertFalse(toolDao.findAll().size() == 0);
+        assertNotEquals(0, toolDao.findAll().size());
         assertEquals("wiertarka", tool.getName());
 
         //CleanUp
