@@ -59,7 +59,7 @@ public class UserMapperTestSuite {
         //Given
 
         //When
-        UserDto userDto = mapper.mapToUserDtoList(user);
+        UserDto userDto = mapper.mapToUserDto(user);
 
         //Then
         assertNotNull(userDto);
@@ -77,7 +77,7 @@ public class UserMapperTestSuite {
         users.add(user);
 
         //When
-        List<UserDto> usersDtoList = mapper.mapToUserDtoList(users);
+        List<UserDto> usersDtoList = mapper.mapToUserDto(users);
 
         //Then
         assertNotNull(usersDtoList);

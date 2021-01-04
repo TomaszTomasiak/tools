@@ -31,13 +31,13 @@ public class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         log.debug("REST request to get all users");
-        return mapper.mapToUserDtoList(service.findAll());
+        return mapper.mapToUserDto(service.findAll());
     }
 
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable("id") long id) throws NotFoundException {
         log.debug("REST request to get user with id: {}", id);
-        return mapper.mapToUserDtoList(service.findById(id).orElseThrow(NotFoundException::new));
+        return mapper.mapToUserDto(service.findById(id).orElseThrow(NotFoundException::new));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -50,7 +50,7 @@ public class UserController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto updateUserById(@PathVariable("id") long id, @RequestBody UserDto userDto) throws EmailExistsException, PeselExistException {
         log.debug("REST request to update user with id: {}", id);
-        return mapper.mapToUserDtoList(service.save(mapper.mapToUser(userDto)));
+        return mapper.mapToUserDto(service.save(mapper.mapToUser(userDto)));
     }
 
     @DeleteMapping("/{id}")

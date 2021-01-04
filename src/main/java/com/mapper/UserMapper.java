@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
-    public UserDto mapToUserDtoList(final User user) {
+    public UserDto mapToUserDto(final User user) {
         UserDto userDtoBean = new UserDto();
         userDtoBean.setId(user.getId());
         userDtoBean.setName(user.getName());
@@ -35,9 +35,9 @@ public class UserMapper {
         return userBean;
     }
 
-    public List<UserDto> mapToUserDtoList(final List<User> users) {
+    public List<UserDto> mapToUserDto(final List<User> users) {
         return users.stream()
-                .map(this::mapToUserDtoList)
+                .map(this::mapToUserDto)
                 .collect(Collectors.toList());
     }
 
