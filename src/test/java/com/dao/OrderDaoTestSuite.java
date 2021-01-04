@@ -14,8 +14,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class OrderDaoTestSuite {
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private OrderRepository orderRepository;
