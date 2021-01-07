@@ -30,7 +30,7 @@ public class Location {
     private String zipCode;
 
     @Column(name = "addres")
-    private String addres;
+    private String address;
 
     @Column(name = "email")
     private String email;
