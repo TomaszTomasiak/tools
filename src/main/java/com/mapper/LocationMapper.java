@@ -21,7 +21,7 @@ public class LocationMapper {
         bean.setCountry(dto.getCountry());
         bean.setCity(dto.getCity());
         bean.setZipCode(dto.getZipCode());
-        bean.setAddres(dto.getAddress());
+        bean.setAddress(dto.getAddress());
         bean.setEmail(dto.getEmail());
         bean.setPhone(dto.getPhone());
         bean.setToolList(dto.getToolList());
@@ -34,7 +34,7 @@ public class LocationMapper {
         dtoBean.setCountry(location.getCountry());
         dtoBean.setCity(location.getCity());
         dtoBean.setZipCode(location.getZipCode());
-        dtoBean.setAddress(location.getAddres());
+        dtoBean.setAddress(location.getAddress());
         dtoBean.setEmail(location.getEmail());
         dtoBean.setPhone(location.getPhone());
         dtoBean.setToolList(location.getToolList());
