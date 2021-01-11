@@ -23,13 +23,15 @@ public class OrderMapperTestSuite {
     @Autowired
     private OrderMapper mapper;
 
-    private User user;
     private Order order;
-    private OrderDto dto;
+    private OrderDto orderDto = OrderDto.builder()
+            .id(8L)
+            .userId(66L)
+            .build();
 
     @Before
     public void init() {
-        user = User.builder()
+        User user = User.builder()
                 .id(5L)
                 .build();
 
@@ -37,28 +39,23 @@ public class OrderMapperTestSuite {
                 .id(7L)
                 .user(user)
                 .build();
-
-        dto = OrderDto.builder()
-                .id(8L)
-                .userId(66L)
-                .build();
     }
 
     @Test
-    public void mapToOrder() {
+    public void mapToOrderTest() {
         //Given
 
         //When
-        Order theOrder = mapper.mapToOrder(dto);
+        Order order1 = mapper.mapToOrder(orderDto);
 
         //Then
-        assertNotNull(order);
-        assertEquals(8L, theOrder.getId());
-        assertEquals(order.getUser().getId(), theOrder.getUser().getId());
+        assertNotNull(order1);
+        assertEquals(8L, order1.getId());
+        assertEquals(orderDto.getUserId(), order1.getUser().getId());
     }
 
     @Test
-    public void mapToOrderDto() {
+    public void mapToOrderDtoTest() {
         //Given
 
         //When
@@ -70,7 +67,7 @@ public class OrderMapperTestSuite {
     }
 
     @Test
-    public void mapToOrderDtoList() {
+    public void mapToOrderDtoListTest() {
         //Given
         List<Order> orders = new ArrayList<>();
         orders.add(order);
@@ -82,5 +79,11 @@ public class OrderMapperTestSuite {
         assertNotNull(orderDtos);
         assertEquals(1, orderDtos.size());
         assertEquals(order.getUser().getId(), orderDtos.get(0).getUserId());
+    }
+
+    @Test
+    public void calculateTotalValueTest(){
+
+
     }
 }
