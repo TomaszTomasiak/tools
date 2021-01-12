@@ -13,18 +13,20 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Component
 public class OrderMapper {
 
     @Autowired
     UserRepository userRepository;
 
-    private BigDecimal calculateValueForRent(final Booking booking) {
-        Duration daysNumber = Duration.between(booking.getBookedDateFrom(), booking.getBookedDateTo());
-        return BigDecimal.valueOf(daysNumber.toDays()).multiply(booking.getTool().getRentRate());
+    BigDecimal calculateValueForRent(final Booking booking) {
+        long daysBetween = DAYS.between(booking.getBookedDateFrom(), booking.getBookedDateTo());
+        return BigDecimal.valueOf(daysBetween).multiply(booking.getTool().getRentRate());
     }
 
-    private BigDecimal calculateTotalValue(Order order) {
+    BigDecimal calculateTotalValue(final Order order) {
         if (order.getBookings().size() == 0) {
             return BigDecimal.ZERO;
         }
