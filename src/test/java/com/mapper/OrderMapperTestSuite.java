@@ -125,4 +125,26 @@ public class OrderMapperTestSuite {
         //Then
         assertEquals(BigDecimal.valueOf(1302).setScale(2, RoundingMode.HALF_DOWN), result);
     }
+
+    @Test
+    public void calculateTotalValueIfBookingsIsEmptyTest(){
+
+        User user = User.builder()
+                .id(5L)
+                .build();
+
+        List<Booking> bookings = new ArrayList<>();
+
+        Order order = Order.builder()
+                .id(7L)
+                .user(user)
+                .bookings(bookings)
+                .build();
+
+        //When
+        BigDecimal result = mapper.calculateTotalValue(order);
+
+        //Then
+        assertEquals(BigDecimal.ZERO, result);
+    }
 }
