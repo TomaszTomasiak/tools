@@ -54,12 +54,6 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteAll() {
-        log.debug("Request to remove all users");
-        userRepository.deleteAll();
-    }
-
     public User getUserByEmail(String mail) {
         return userRepository.findUserByEmail(mail);
     }
