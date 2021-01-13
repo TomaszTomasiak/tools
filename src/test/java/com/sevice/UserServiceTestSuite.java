@@ -83,4 +83,86 @@ public class UserServiceTestSuite {
         assertEquals(userNew.getSurname(), resultUser.getSurname());
         assertEquals(userNew.getPhone(), resultUser.getPhone());
     }
+
+    @Test(expected = NotFoundException.class)
+    public void testUserByIdNotFound() throws NotFoundException, EmailExistsException, PeselExistException {
+        //Given
+        User userNew = User.builder()
+                .name("Maryla")
+                .surname("Rodowicz")
+                .email("test@mail.com")
+                .password("password2")
+                .pesel("1234567890")
+                .phone("222222222")
+                .build();
+
+        userService.save(userNew);
+
+        //When
+        User resultUser = userService.getUserByEmail("test@mail.com");
+        User userNotFound = userService.findById(2222).orElseThrow(NotFoundException::new);
+
+        //Then
+        assertSame(NotFoundException.class, NotFoundException.class);
+        assertEquals("Maryla", resultUser.getName());
+    }
+
+    @Test(expected = EmailExistsException.class)
+    public void testUserEmailExistsException() throws EmailExistsException, PeselExistException {
+        //Given
+        User userNew = User.builder()
+                .name("Maryla")
+                .surname("Rodowicz")
+                .email("john.rambo@mail.com")
+                .password("password2")
+                .pesel("1234567890")
+                .phone("222222222")
+                .build();
+
+        User userNew1 = User.builder()
+                .name("Maryla")
+                .surname("Rodowicz")
+                .email("john.rambo@mail.com")
+                .password("password2")
+                .pesel("1234567890")
+                .phone("222222222")
+                .build();
+
+        userService.save(userNew);
+
+        //When
+        userService.save(userNew1);
+        //Then
+
+    }
+
+    @Test(expected = PeselExistException.class)
+    public void testUserPeselExistsException() throws EmailExistsException, PeselExistException {
+        //Given
+        User userNew = User.builder()
+                .name("Maryla")
+                .surname("Rodowicz")
+                .email("john.rambo@mail.com")
+                .password("password2")
+                .pesel("1234567890")
+                .phone("222222222")
+                .build();
+
+        User userNew1 = User.builder()
+                .name("Maryla")
+                .surname("Rodowicz")
+                .email("test@test.pl")
+                .password("password2")
+                .pesel("1234567890")
+                .phone("222222222")
+                .build();
+
+        userService.save(userNew);
+
+        //When
+        userService.save(userNew1);
+
+        //Then
+
+    }
 }
