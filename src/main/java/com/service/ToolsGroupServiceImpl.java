@@ -1,6 +1,8 @@
 package com.service;
 
 import com.domain.ToolsGroup;
+import com.repository.ToolsGroupRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,24 +13,26 @@ import java.util.Optional;
 @Service
 public class ToolsGroupServiceImpl implements ToolsGroupService {
 
+    @Autowired
+    private ToolsGroupRepository repository;
 
     @Override
     public List<ToolsGroup> getAllGroups() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public Optional<ToolsGroup> getGroup(long id) {
-        return Optional.empty();
+        return repository.findById(id);
     }
 
     @Override
     public ToolsGroup saveGroup(ToolsGroup group) {
-        return null;
+        return repository.save(group);
     }
 
     @Override
     public ToolsGroup getGroupById(long id) {
-        return null;
+        return repository.findToolsGroupById(id);
     }
 }
