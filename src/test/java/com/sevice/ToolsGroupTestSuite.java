@@ -1,6 +1,7 @@
 package com.sevice;
 
 import com.domain.ToolsGroup;
+import com.exception.NotFoundException;
 import com.service.ToolsGroupServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,7 @@ public class ToolsGroupTestSuite {
     @Autowired
     private ToolsGroupServiceImpl service;
 
-    private ToolsGroup toolsGroup = ToolsGroup.builder()
+    private final ToolsGroup toolsGroup = ToolsGroup.builder()
             .id(15)
             .name("budowlane")
             .build();
@@ -35,5 +36,24 @@ public class ToolsGroupTestSuite {
 
         assertEquals(1, numberOfGroupsAfterAddUser - numberOfGroupsBeforeAddUser);
         assertTrue(service.getAllGroups().size() > 0);
+    }
+
+    @Test
+    public void testGetExistingGroup() throws NotFoundException {
+        //Given
+        ToolsGroup toolsGroup1 = new ToolsGroup();
+        toolsGroup1.setName("ogrodnicze");
+        //When
+        service.saveGroup(toolsGroup1);
+        long id = toolsGroup1.getId();
+        ToolsGroup group = service.getGroup(id).orElseThrow(NotFoundException::new);
+
+        //Then
+        assertEquals(group.getName(), toolsGroup1.getName());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void testTryToGetNotExistingGroup() throws NotFoundException {
+        ToolsGroup group = service.getGroup(100).orElseThrow(NotFoundException::new);
     }
 }
