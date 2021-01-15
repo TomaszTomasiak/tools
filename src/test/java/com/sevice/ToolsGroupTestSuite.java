@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,10 +32,11 @@ public class ToolsGroupTestSuite {
         long numberOfGroupsAfterAddUser = service.getAllGroups().size();
 
         //Then
-
         assertEquals(1, numberOfGroupsAfterAddUser - numberOfGroupsBeforeAddUser);
         assertTrue(service.getAllGroups().size() > 0);
     }
+
+
 
     @Test
     public void testGetExistingGroup() throws NotFoundException {
@@ -55,5 +55,45 @@ public class ToolsGroupTestSuite {
     @Test(expected = NotFoundException.class)
     public void testTryToGetNotExistingGroup() throws NotFoundException {
         ToolsGroup group = service.getGroup(100).orElseThrow(NotFoundException::new);
+    }
+
+    @Test
+    public void testGetExistingGroupByIdWithotTrowingException() {
+        //Given
+        ToolsGroup toolsGroup1 = new ToolsGroup();
+        toolsGroup1.setName("ogrodnicze");
+        //When
+        service.saveGroup(toolsGroup1);
+        long id = toolsGroup1.getId();
+        ToolsGroup group = service.getGroupById(id);
+
+        //Then
+        assertEquals(group.getName(), toolsGroup1.getName());
+    }
+
+    @Test
+    public void testGetNotExistingGroupByIdWithoutTrowingException() {
+        //Given
+        //When
+        ToolsGroup group = service.getGroupById(100);
+        //Then
+        assertSame(null, group);
+    }
+
+    @Test
+    public void testTryUpdateGroup() {
+        //Given
+        ToolsGroup toolsGroup1 = new ToolsGroup();
+        toolsGroup1.setName("ogrodnicze");
+        //When
+        service.saveGroup(toolsGroup1);
+        long id = toolsGroup1.getId();
+        toolsGroup1.setName("budowlane");
+        service.saveGroup(toolsGroup1);
+        ToolsGroup group = service.getGroupById(id);
+
+        //Then
+        assertEquals("budowlane", toolsGroup1.getName());
+
     }
 }
