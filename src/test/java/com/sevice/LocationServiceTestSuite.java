@@ -1,6 +1,8 @@
 package com.sevice;
 
 import com.domain.Location;
+import com.domain.User;
+import com.exception.NotFoundException;
 import com.service.LocationServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +56,19 @@ public class LocationServiceTestSuite {
 
         //Then
         assertFalse(service.getLocation(id).isPresent());
+    }
+
+    @Test
+    public void testReturnLocationById() throws NotFoundException {
+        //Given
+        service.saveLocation(location);
+        long id = location.getId();
+        //When
+        Location location1 = service.getLocation(location.getId()).orElseThrow(NotFoundException::new);
+        //Then
+        assertEquals(id, location1.getId());
+        assertEquals(location.getAddress(), location1.getAddress());
+        assertEquals(location.getPhone(), location1.getPhone());
     }
 
 
