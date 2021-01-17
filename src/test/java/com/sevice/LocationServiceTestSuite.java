@@ -71,5 +71,8 @@ public class LocationServiceTestSuite {
         assertEquals(location.getPhone(), location1.getPhone());
     }
 
-
+    @Test(expected = NotFoundException.class)
+    public void testLocationByIdNotFound() throws NotFoundException {
+        service.getLocation(2222).orElseThrow(NotFoundException::new);
+    }
 }
