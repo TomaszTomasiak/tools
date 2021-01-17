@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,7 +19,6 @@ public class LocationServiceTestSuite {
     private LocationServiceImpl service;
 
     private Location location = Location.builder()
-            .id(22)
             .country("Poland")
             .city("Warsaw")
             .zipCode("00-950")
@@ -39,6 +39,21 @@ public class LocationServiceTestSuite {
         //Then
         assertEquals("Poland", location.getCountry());
         assertEquals(1, numberOfLocationsAfterAddUser - numberOfLocationsBeforeAddUser);
+    }
+
+    @Test
+    public void testDeleteLocation() {
+        //Given
+        Location location1 = location;
+
+        service.saveLocation(location1);
+        long id  = location1.getId();
+
+        //When
+        service.deleteLocation(id);
+
+        //Then
+        assertFalse(service.getLocation(id).isPresent());
     }
 
 
