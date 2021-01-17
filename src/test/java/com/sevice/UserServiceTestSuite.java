@@ -30,7 +30,7 @@ public class UserServiceTestSuite {
             .build();
 
     @Test
-    public void testSaveAndGetUser() throws EmailExistsException, PeselExistException {
+    public void testSaveUser() throws EmailExistsException, PeselExistException {
         //Given
         long numberOfUsersBeforeAddUser = userService.findAll().size();
         //When
