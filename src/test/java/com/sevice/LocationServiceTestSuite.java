@@ -1,7 +1,6 @@
 package com.sevice;
 
 import com.domain.Location;
-import com.domain.User;
 import com.exception.NotFoundException;
 import com.service.LocationServiceImpl;
 import org.junit.Test;
@@ -20,20 +19,18 @@ public class LocationServiceTestSuite {
     @Autowired
     private LocationServiceImpl service;
 
-    private Location location = Location.builder()
-            .country("Poland")
-            .city("Warsaw")
-            .zipCode("00-950")
-            .address("Woronicza 17")
-            .email("email@test.pl")
-            .phone("666111333")
-            .build();
-
-
     @Test
     public void testSaveLocation() {
         //Given
         int numberOfLocationsBeforeAddUser = service.getAllLocations().size();
+        Location location = Location.builder()
+                .country("Poland")
+                .city("Warsaw")
+                .zipCode("00-950")
+                .address("Woronicza 17")
+                .email("email@test.pl")
+                .phone("666111333")
+                .build();
         //When
         service.saveLocation(location);
 
@@ -46,7 +43,15 @@ public class LocationServiceTestSuite {
     @Test
     public void testDeleteLocation() {
         //Given
-        Location location1 = location;
+
+        Location location1 = Location.builder()
+                .country("Poland")
+                .city("Warsaw")
+                .zipCode("00-950")
+                .address("Woronicza 17")
+                .email("email@test.pl")
+                .phone("666111333")
+                .build();
 
         service.saveLocation(location1);
         long id  = location1.getId();
@@ -61,6 +66,15 @@ public class LocationServiceTestSuite {
     @Test
     public void testReturnLocationById() throws NotFoundException {
         //Given
+        Location location = Location.builder()
+                .country("Poland")
+                .city("Warsaw")
+                .zipCode("00-950")
+                .address("Woronicza 17")
+                .email("email@test.pl")
+                .phone("666111333")
+                .build();
+
         service.saveLocation(location);
         long id = location.getId();
         //When
