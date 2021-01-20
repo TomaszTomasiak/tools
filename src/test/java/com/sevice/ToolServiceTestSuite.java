@@ -144,4 +144,12 @@ public class ToolServiceTestSuite {
         assertEquals(tool.getLocation().getId(), tool1.getLocation().getId());
         assertEquals(tool.getGroup().getName(), tool1.getGroup().getName());
     }
+
+    @Test(expected = NotFoundException.class)
+    public void testShoudNotReturnToolById() throws NotFoundException {
+        //Given
+        //When
+        Tool tool1 = service.getTool(55555).orElseThrow(NotFoundException::new);
+
+    }
 }
