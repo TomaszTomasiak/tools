@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,7 +38,6 @@ public class ToolServiceTestSuite {
                 .name("ogrodnicze")
                 .build();
         toolsGroupService.saveGroup(group);
-        long groupId = group.getId();
 
         Location location = Location.builder()
                 .country("Poland")
@@ -49,7 +48,6 @@ public class ToolServiceTestSuite {
                 .phone("666111333")
                 .build();
         locationService.saveLocation(location);
-        long locationId = location.getId();
 
         Tool tool = Tool.builder()
                 .rentRate(BigDecimal.TEN)
@@ -67,5 +65,45 @@ public class ToolServiceTestSuite {
         //Then
         assertEquals(1, numberOfToolsAfterToolSave - numberOfTools);
         assertTrue(numberOfToolsAfterToolSave > 0);
+    }
+
+    @Test
+    public void testRemoveTool() {
+        //Given
+
+        int numberOfTools = service.getAllTools().size();
+        ToolsGroup group = ToolsGroup.builder()
+                .name("ogrodnicze")
+                .build();
+        toolsGroupService.saveGroup(group);
+
+        Location location = Location.builder()
+                .country("Poland")
+                .city("Warsaw")
+                .zipCode("00-950")
+                .address("Woronicza 17")
+                .email("email@test.pl")
+                .phone("666111333")
+                .build();
+        locationService.saveLocation(location);
+
+        Tool tool = Tool.builder()
+                .rentRate(BigDecimal.TEN)
+                .group(group)
+                .location(location)
+                .name("szpadel")
+                .build();
+
+
+        //When
+        service.saveTool(tool);
+        long toolId = tool.getId();
+        service.deleteTool(toolId);
+        int numberOfToolsAfterToolRemove = service.getAllTools().size();
+
+
+        //Then
+        assertEquals(0, numberOfToolsAfterToolRemove - numberOfTools);
+        assertFalse(service.getTool(toolId).isPresent());
     }
 }
