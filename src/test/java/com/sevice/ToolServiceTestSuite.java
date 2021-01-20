@@ -3,6 +3,7 @@ package com.sevice;
 import com.domain.Location;
 import com.domain.Tool;
 import com.domain.ToolsGroup;
+import com.exception.NotFoundException;
 import com.service.LocationServiceImpl;
 import com.service.ToolServiceImpl;
 import com.service.ToolsGroupServiceImpl;
@@ -94,16 +95,53 @@ public class ToolServiceTestSuite {
                 .name("szpadel")
                 .build();
 
-
         //When
         service.saveTool(tool);
         long toolId = tool.getId();
         service.deleteTool(toolId);
         int numberOfToolsAfterToolRemove = service.getAllTools().size();
 
-
         //Then
         assertEquals(0, numberOfToolsAfterToolRemove - numberOfTools);
         assertFalse(service.getTool(toolId).isPresent());
+    }
+
+    @Test
+    public void testReturnToolById() throws NotFoundException {
+        //Given
+
+        int numberOfTools = service.getAllTools().size();
+        ToolsGroup group = ToolsGroup.builder()
+                .name("ogrodnicze")
+                .build();
+        toolsGroupService.saveGroup(group);
+
+        Location location = Location.builder()
+                .country("Poland")
+                .city("Warsaw")
+                .zipCode("00-950")
+                .address("Woronicza 17")
+                .email("email@test.pl")
+                .phone("666111333")
+                .build();
+        locationService.saveLocation(location);
+
+        Tool tool = Tool.builder()
+                .rentRate(BigDecimal.TEN)
+                .group(group)
+                .location(location)
+                .name("szpadel")
+                .build();
+
+        //When
+        service.saveTool(tool);
+        long toolId = tool.getId();
+
+        Tool tool1 = service.getTool(toolId).orElseThrow(NotFoundException::new);
+
+        //Then
+        assertEquals(toolId, tool1.getId());
+        assertEquals(tool.getLocation().getId(), tool1.getLocation().getId());
+        assertEquals(tool.getGroup().getName(), tool1.getGroup().getName());
     }
 }
