@@ -4,6 +4,7 @@ import com.domain.Booking;
 import com.domain.Order;
 import com.domain.Tool;
 import com.domain.ToolsGroup;
+import com.exception.NotFoundException;
 import com.service.BookingServiceImpl;
 import com.service.OrderServiceImpl;
 import com.service.ToolServiceImpl;
@@ -73,6 +74,39 @@ public class BookingServiceTestSuite {
     @Test
     public void testRemoveBooking () {
         //Given
+
+        ToolsGroup group = ToolsGroup.builder()
+                .name("budowlane")
+                .build();
+        groupService.saveGroup(group);
+
+        Tool tool = Tool.builder()
+                .name("betoniarka")
+                .group(group)
+                .rentRate(BigDecimal.TEN)
+                .build();
+
+        toolService.saveTool(tool);
+
+        Booking theBooking = Booking.builder()
+                .tool(tool)
+                .bookedDateFrom(LocalDate.of(2020, 10, 1))
+                .bookedDateTo(LocalDate.of(2020, 10, 22))
+                .build();
+
+        //When
+        service.saveBookings(theBooking);
+        long bookingId = theBooking.getId();
+
+        service.deleteBooking(bookingId);
+
+        //Then
+        assertFalse(service.getBooking(bookingId).isPresent());
+    }
+
+    @Test
+    public void testFindExistingBookingById() throws NotFoundException {
+        //Given
         int bookingListSizeBeforeSavingNewBooking = service.getAllBookings().size();
 
         ToolsGroup group = ToolsGroup.builder()
@@ -100,11 +134,11 @@ public class BookingServiceTestSuite {
         service.saveBookings(theBooking);
         long bookingId = theBooking.getId();
 
-        service.deleteBooking(bookingId);
-
-        int bookingListSizeAfterRemovingNewBooking = service.getAllBookings().size();
+        Booking newBooking = service.getBooking(bookingId).orElseThrow(NotFoundException::new);
 
         //Then
-        assertFalse(service.getBooking(bookingId).isPresent());
+        assertTrue(service.getBooking(bookingId).isPresent());
+        assertEquals(bookingId, theBooking.getId());
+        assertEquals(theBooking.getBookedDateFrom(), newBooking.getBookedDateFrom());
     }
 }
