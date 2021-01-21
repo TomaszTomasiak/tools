@@ -113,12 +113,13 @@ public class BookingDaoTestSuite {
 
         //When
         dao.save(booking);
-        long id = booking.getId();
         int number = dao.findAll().size();
+        long id = booking.getId();
         dao.deleteById(id);
+        int numberAfterDelete = dao.findAll().size();
 
         //Then
-        assertEquals(0, number - 1);
+        assertEquals(number, numberAfterDelete);
 
         //CleanUp
         cleanUp();
