@@ -50,7 +50,7 @@ public class BookingDaoTestSuite {
         tool.setGroup(group);
         tool.setLocation(location);
         booking = new Booking();
-        booking.setOrder(order);
+//        booking.setOrder(order);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));

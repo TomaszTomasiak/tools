@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +21,7 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "BOOKING_ID")
     private long id;
 
     @Column(name = "BOOKED_FROM")
@@ -32,7 +35,7 @@ public class Booking {
     @JoinColumn(name = "TOOL_ID")
     private Tool tool;
 
-    @ManyToOne //tu musi być ManyToMany
-    @JoinColumn(name = "ORDER_ID")
-    private Order order;
+    @Builder.Default
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "bookings")
+    private List<Order> orders = new ArrayList<>();
 }

@@ -47,7 +47,7 @@ public class BookingMapperTestSuite {
             .bookedDateFrom(LocalDate.of(2020, 10, 14))
             .bookedDateTo(LocalDate.of(2020, 10, 25))
             .tool(tool)
-            .order(order)
+//            .order(order)
             .build();
 
     private BookingDto dto = BookingDto.builder()

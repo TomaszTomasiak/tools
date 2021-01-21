@@ -18,6 +18,7 @@ public class ToolsGroup {
     @Column(name = "name")
     private String name;
 
+    @Builder.Default
     @OneToMany(
             targetEntity = Tool.class,
             mappedBy = "group",

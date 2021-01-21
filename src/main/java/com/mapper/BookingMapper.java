@@ -28,7 +28,7 @@ public class BookingMapper {
         bookingBean.setBookedDateFrom(dto.getBookedDateFrom());
         bookingBean.setBookedDateTo(dto.getBookedDateTo());
         bookingBean.setTool(toolRepository.findToolById(dto.getToolId()));
-        bookingBean.setOrder(orderRepository.findOrderById(dto.getOrderId()));
+//        bookingBean.setOrder(orderRepository.findOrderById(dto.getOrderId()));
         return bookingBean;
 
     }
@@ -39,12 +39,12 @@ public class BookingMapper {
         dtoBean.setBookedDateFrom(booking.getBookedDateFrom());
         dtoBean.setBookedDateTo(booking.getBookedDateTo());
         dtoBean.setToolId(booking.getTool().getId());
-        if(booking.getOrder()== null) {
-            dtoBean.setOrderId(null);
-        }
-        else {
-            dtoBean.setOrderId(booking.getOrder().getId());
-        }
+//        if(booking.getOrder()== null) {
+//            dtoBean.setOrderId(null);
+//        }
+//        else {
+//            dtoBean.setOrderId(booking.getOrder().getId());
+//        }
         return dtoBean;
     }
 
