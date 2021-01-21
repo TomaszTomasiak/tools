@@ -1,6 +1,7 @@
 package com.sevice;
 
 import com.domain.Booking;
+import com.domain.Order;
 import com.domain.Tool;
 import com.domain.ToolsGroup;
 import com.service.BookingServiceImpl;
@@ -67,5 +68,43 @@ public class BookingServiceTestSuite {
         assertTrue(bookingListSizeAfterSavingNewBooking > bookingListSizeBeforeSavingNewBooking);
         assertEquals("betoniarka", booking.getTool().getName());
         assertEquals("budowlane", booking.getTool().getGroup().getName());
+    }
+
+    @Test
+    public void testRemoveBooking () {
+        //Given
+        int bookingListSizeBeforeSavingNewBooking = service.getAllBookings().size();
+
+        ToolsGroup group = ToolsGroup.builder()
+                .name("budowlane")
+                .build();
+        groupService.saveGroup(group);
+        long groupId = group.getId();
+
+        Tool tool = Tool.builder()
+                .name("betoniarka")
+                .group(group)
+                .rentRate(BigDecimal.TEN)
+                .build();
+
+        toolService.saveTool(tool);
+        long toolId = tool.getId();
+
+        Booking theBooking = Booking.builder()
+                .tool(tool)
+                .bookedDateFrom(LocalDate.of(2020, 10, 1))
+                .bookedDateTo(LocalDate.of(2020, 10, 22))
+                .build();
+
+        //When
+        service.saveBookings(theBooking);
+        long bookingId = theBooking.getId();
+
+        service.deleteBooking(bookingId);
+
+        int bookingListSizeAfterRemovingNewBooking = service.getAllBookings().size();
+
+        //Then
+        assertFalse(service.getBooking(bookingId).isPresent());
     }
 }

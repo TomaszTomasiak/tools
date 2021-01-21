@@ -32,13 +32,7 @@ public class Booking {
     @JoinColumn(name = "TOOL_ID")
     private Tool tool;
 
-//    @ManyToOne
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
-
-    @ManyToOne
+    @ManyToOne //tu musi być ManyToMany
     @JoinColumn(name = "ORDER_ID")
     private Order order;
-
-
 }
