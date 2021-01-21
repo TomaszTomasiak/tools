@@ -1,14 +1,10 @@
 package com.sevice;
 
-import com.domain.Booking;
-import com.domain.Order;
-import com.domain.Tool;
-import com.domain.ToolsGroup;
+import com.domain.*;
+import com.exception.EmailExistsException;
 import com.exception.NotFoundException;
-import com.service.BookingServiceImpl;
-import com.service.OrderServiceImpl;
-import com.service.ToolServiceImpl;
-import com.service.ToolsGroupServiceImpl;
+import com.exception.PeselExistException;
+import com.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -24,7 +22,7 @@ import static org.junit.Assert.*;
 public class BookingServiceTestSuite {
 
     @Autowired
-    private BookingServiceImpl service;
+    private BookingServiceImpl bookingService;
 
     @Autowired
     private ToolServiceImpl toolService;
@@ -35,10 +33,13 @@ public class BookingServiceTestSuite {
     @Autowired
     private ToolsGroupServiceImpl groupService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @Test
     public void testSaveAndGetAllBookings () {
         //Given
-       int bookingListSizeBeforeSavingNewBooking = service.getAllBookings().size();
+       int bookingListSizeBeforeSavingNewBooking = bookingService.getAllBookings().size();
 
         ToolsGroup group = ToolsGroup.builder()
                 .name("budowlane")
@@ -62,8 +63,8 @@ public class BookingServiceTestSuite {
                 .build();
 
         //When
-        service.saveBookings(booking);
-        int bookingListSizeAfterSavingNewBooking = service.getAllBookings().size();
+        bookingService.saveBookings(booking);
+        int bookingListSizeAfterSavingNewBooking = bookingService.getAllBookings().size();
 
         //Then
         assertTrue(bookingListSizeAfterSavingNewBooking > bookingListSizeBeforeSavingNewBooking);
@@ -72,9 +73,9 @@ public class BookingServiceTestSuite {
     }
 
     @Test
-    public void testRemoveBooking () {
+    public void testRemoveBooking () throws EmailExistsException, PeselExistException {
         //Given
-
+        int bookingListSizeBeforeSavingNewBooking = bookingService.getAllBookings().size();
         ToolsGroup group = ToolsGroup.builder()
                 .name("budowlane")
                 .build();
@@ -88,6 +89,23 @@ public class BookingServiceTestSuite {
 
         toolService.saveTool(tool);
 
+        User user = User.builder()
+                .name("Maryla")
+                .surname("Rodowicz")
+                .email("test@mail.com")
+                .password("password2")
+                .pesel("1234567890")
+                .phone("222222222")
+                .build();
+
+        userService.save(user);
+
+        Order order = Order.builder()
+                .user(user)
+                .build();
+
+        orderService.saveOrder(order);
+
         Booking theBooking = Booking.builder()
                 .tool(tool)
                 .bookedDateFrom(LocalDate.of(2020, 10, 1))
@@ -95,19 +113,23 @@ public class BookingServiceTestSuite {
                 .build();
 
         //When
-        service.saveBookings(theBooking);
-        long bookingId = theBooking.getId();
+        bookingService.saveBookings(theBooking);
+        long id = theBooking.getId();
+        int bookingListSizeAfterSaveBooking = bookingService.getAllBookings().size();
 
-        service.deleteBooking(bookingId);
+        bookingService.deleteBooking(id); // nie działa
 
+        int bookingListSizeAfterDeleteBooking = bookingService.getAllBookings().size();
         //Then
-        assertFalse(service.getBooking(bookingId).isPresent());
+       assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
+       assertEquals(bookingListSizeBeforeSavingNewBooking +1 , bookingListSizeAfterSaveBooking);
+       assertFalse(bookingService.getBooking(id).isPresent());
     }
 
     @Test
     public void testFindExistingBookingById() throws NotFoundException {
         //Given
-        int bookingListSizeBeforeSavingNewBooking = service.getAllBookings().size();
+        int bookingListSizeBeforeSavingNewBooking = bookingService.getAllBookings().size();
 
         ToolsGroup group = ToolsGroup.builder()
                 .name("budowlane")
@@ -122,7 +144,6 @@ public class BookingServiceTestSuite {
                 .build();
 
         toolService.saveTool(tool);
-        long toolId = tool.getId();
 
         Booking theBooking = Booking.builder()
                 .tool(tool)
@@ -131,14 +152,19 @@ public class BookingServiceTestSuite {
                 .build();
 
         //When
-        service.saveBookings(theBooking);
+        bookingService.saveBookings(theBooking);
         long bookingId = theBooking.getId();
 
-        Booking newBooking = service.getBooking(bookingId).orElseThrow(NotFoundException::new);
+        Booking newBooking = bookingService.getBooking(bookingId).orElseThrow(NotFoundException::new);
 
         //Then
-        assertTrue(service.getBooking(bookingId).isPresent());
+        assertTrue(bookingService.getBooking(bookingId).isPresent());
         assertEquals(bookingId, theBooking.getId());
         assertEquals(theBooking.getBookedDateFrom(), newBooking.getBookedDateFrom());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void findNotExistingBooking() throws NotFoundException {
+        Booking booking = bookingService.getBooking(55555).orElseThrow(NotFoundException::new);
     }
 }
