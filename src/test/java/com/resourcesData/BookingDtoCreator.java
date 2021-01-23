@@ -22,7 +22,6 @@ public class BookingDtoCreator {
         return BookingDto.builder()
                 .id(ID)
                 .toolId(TOOL_ID)
-                .orderId(ORDER_ID)
                 .bookedDateFrom(BOOKED_DATE_FROM)
                 .bookedDateTo(BOOKED_DATE_TO)
                 .build();
@@ -33,7 +32,6 @@ public class BookingDtoCreator {
         return BookingDto.builder()
                 .id(ID_UPDATED)
                 .toolId(TOOL_ID_UPDATED)
-                .orderId(ORDER_ID_UPDATED)
                 .bookedDateFrom(BOOKED_DATE_FROM_UPDATED)
                 .bookedDateTo(BOOKED_DATE_TO_UPDATED)
                 .build();

@@ -93,11 +93,11 @@ public class BookingServiceTestSuite {
         toolService.saveTool(tool);
 
         User user = User.builder()
-                .name("Maryla")
-                .surname("Rodowicz")
-                .email("test@mail.com")
-                .password("password2")
-                .pesel("1234567890")
+                .name("Zbigniew")
+                .surname("Kos")
+                .email("test1222@mail.com")
+                .password("password2222")
+                .pesel("1212121200")
                 .phone("222222222")
                 .build();
 
@@ -121,19 +121,18 @@ public class BookingServiceTestSuite {
 
         int bookingListSizeAfterSaveBooking = bookingService.getAllBookings().size();
 
-        //bookingService.deleteBooking(theBookingId); // nie działa!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        bookingService.deleteBooking(theBookingId);
 
         int bookingListSizeAfterDeleteBooking = bookingService.getAllBookings().size();
         //Then
-//       assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
-//       assertEquals(bookingListSizeBeforeSavingNewBooking +1 , bookingListSizeAfterSaveBooking);
+       assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
+       assertEquals(bookingListSizeBeforeSavingNewBooking +1 , bookingListSizeAfterSaveBooking);
        assertFalse(bookingService.getBooking(theBookingId).isPresent());
     }
 
     @Test
     public void testFindExistingBookingById() throws NotFoundException {
         //Given
-        int bookingListSizeBeforeSavingNewBooking = bookingService.getAllBookings().size();
 
         ToolsGroup group = ToolsGroup.builder()
                 .name("budowlane")

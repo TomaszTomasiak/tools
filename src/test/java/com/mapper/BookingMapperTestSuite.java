@@ -55,7 +55,6 @@ public class BookingMapperTestSuite {
             .bookedDateFrom(LocalDate.of(2020, 12, 22))
             .bookedDateTo(LocalDate.of(2021, 1, 8))
             .toolId(5L)
-            .orderId(2L)
             .build();
 
     @Test
@@ -84,7 +83,7 @@ public class BookingMapperTestSuite {
         assertNotNull(bookingDto);
         assertEquals(java.util.Optional.of(6L), java.util.Optional.ofNullable(bookingDto.getId()));
         assertEquals(LocalDate.of(2020, 10, 14), bookingDto.getBookedDateFrom());
-        assertEquals(java.util.Optional.of(99L), java.util.Optional.ofNullable(bookingDto.getOrderId()));
+
 
     }
 
