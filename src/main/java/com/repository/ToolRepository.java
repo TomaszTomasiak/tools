@@ -12,7 +12,6 @@ public interface ToolRepository extends CrudRepository<Tool, Long> {
 //    List<Tool> findToolsByProducer(String producer);
 //    List<Tool> findToolsByToolsGroup(Long groupId);
 
-
     @Override
     List<Tool> findAll();
 

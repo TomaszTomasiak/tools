@@ -23,6 +23,5 @@ public class BookingDto {
     private LocalDate bookedDateTo;
 
     private Long toolId;
-    private Long orderId;
 
 }

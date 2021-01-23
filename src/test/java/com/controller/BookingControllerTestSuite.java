@@ -45,7 +45,7 @@ public class BookingControllerTestSuite {
     public void init() {
         bookingDto = BookingDtoCreator.bookingDtoCreator();
         bookingDto.setId(1L);
-        bookingDto.setOrderId(1L);
+        //bookingDto.setOrderId(1L);
         bookingDto.setToolId(1L);
     }
 
@@ -112,7 +112,7 @@ public class BookingControllerTestSuite {
 
         BookingDto updatedBookingDto = BookingDtoCreator.updatedBookingDtoCreator();
         updatedBookingDto.setId(1L);
-        updatedBookingDto.setOrderId(2L);
+        //updatedBookingDto.setOrderId(2L);
         updatedBookingDto.setToolId(2L);
         updatedBookingDto.setBookedDateFrom(LocalDate.of(2019, 11, 22));
         when(controller.updateBookingById(ArgumentMatchers.anyLong(), (ArgumentMatchers.any(BookingDto.class)))).thenReturn(updatedBookingDto);

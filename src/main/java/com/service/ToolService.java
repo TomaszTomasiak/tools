@@ -1,13 +1,10 @@
 package com.service;
 
 import com.domain.Tool;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface ToolService {
     List<Tool> getAllTools();
 
