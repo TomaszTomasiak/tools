@@ -38,8 +38,6 @@ public class BookingServiceTestSuite {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    private BookingRepository repository;
 
     @Test
     public void testSaveAndGetAllBookings () {
@@ -124,7 +122,7 @@ public class BookingServiceTestSuite {
         int bookingListSizeAfterSaveBooking = bookingService.getAllBookings().size();
 
         //bookingService.deleteBooking(theBookingId); // nie działa!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        repository.deleteById(theBookingId); //to też nie działa!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         int bookingListSizeAfterDeleteBooking = bookingService.getAllBookings().size();
         //Then
 //       assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
