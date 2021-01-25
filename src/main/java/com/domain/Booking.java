@@ -35,7 +35,7 @@ public class Booking {
     @JoinColumn(name = "TOOL_ID")
     private Tool tool;
 
-    @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "bookings")
-    private List<Order> orders = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 }

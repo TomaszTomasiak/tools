@@ -26,19 +26,13 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-//
-//    @OneToMany(
-//            targetEntity = Booking.class,
-//            mappedBy = "order",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY
-//    )
+
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "JOIN_ORDERS_BOOKINGS",
-            joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "BOOKING_ID", referencedColumnName = "BOOKING_ID")}
+    @OneToMany(
+            targetEntity = Booking.class,
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
     private List<Booking> bookings = new ArrayList<>();
 }

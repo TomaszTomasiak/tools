@@ -3,6 +3,7 @@ package com.dao;
 import com.domain.*;
 import com.repository.*;
 import com.resourcesData.ToolCreator;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
 public class BookingDaoTestSuite {
 
     @Autowired
-    private BookingRepository dao;
+    private BookingRepository repository;
 
     @Autowired
     private ToolRepository toolRepository;
@@ -50,19 +51,15 @@ public class BookingDaoTestSuite {
         tool.setGroup(group);
         tool.setLocation(location);
         booking = new Booking();
-//        booking.setOrder(order);
+        booking.setOrder(order);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
     }
 
-    private void cleanUp() {
-        dao.deleteAll();
-        toolRepository.deleteAll();
-        orderRepository.deleteAll();
-        groupRepository.deleteAll();
-        locationRepository.deleteAll();
-    }
+    @After
+
+
 
     @Test
     public void testBookingDaoSave() {
@@ -73,15 +70,24 @@ public class BookingDaoTestSuite {
         toolRepository.save(tool);
 
         //When
-        dao.save(booking);
-        Long id = booking.getId();
+        repository.save(booking);
+        long bookingId = booking.getId();
+        long orderId = order.getId();
+        long groupId = group.getId();
+        long locationId = location.getId();
+        long toolId = tool.getId();
+
 
         //Then
-        assertTrue(dao.count() > 0);
+        assertTrue(repository.count() > 0);
         assertEquals(LocalDate.of(2020, 10, 25), booking.getBookedDateTo());
 
         //CleanUp
-        cleanUp();
+        repository.deleteById(bookingId);
+        toolRepository.deleteById(toolId);
+        orderRepository.deleteById(orderId);
+        groupRepository.deleteById(groupId);
+        locationRepository.deleteById(locationId);
     }
 
     @Test
@@ -93,13 +99,23 @@ public class BookingDaoTestSuite {
         toolRepository.save(tool);
 
         //When
-        dao.save(booking);
+        repository.save(booking);
+        long bookingId = booking.getId();
+        long orderId = order.getId();
+        long groupId = group.getId();
+        long locationId = location.getId();
+        long toolId = tool.getId();
+
 
         //Then
-        assertTrue(dao.findAll().size() > 0);
+        assertTrue(repository.findAll().size() > 0);
 
         //CleanUp
-        cleanUp();
+        repository.deleteById(bookingId);
+        toolRepository.deleteById(toolId);
+        orderRepository.deleteById(orderId);
+        groupRepository.deleteById(groupId);
+        locationRepository.deleteById(locationId);
     }
 
     @Test
@@ -112,17 +128,28 @@ public class BookingDaoTestSuite {
         toolRepository.save(tool);
 
         //When
-        dao.save(booking);
-        int number = dao.findAll().size();
-        long id = booking.getId();
-        dao.deleteById(id);
-        int numberAfterDelete = dao.findAll().size();
+        repository.save(booking);
+        int number = repository.findAll().size();
+        long bookingId = booking.getId();
+        repository.deleteById(bookingId);
+        int numberAfterDelete = repository.findAll().size();
+
+
+        long orderId = order.getId();
+        long groupId = group.getId();
+        long locationId = location.getId();
+        long toolId = tool.getId();
+
 
         //Then
         assertEquals(number, numberAfterDelete);
 
         //CleanUp
-        cleanUp();
+        repository.deleteById(bookingId);
+        toolRepository.deleteById(toolId);
+        orderRepository.deleteById(orderId);
+        groupRepository.deleteById(groupId);
+        locationRepository.deleteById(locationId);
     }
 
     @Test
@@ -134,14 +161,23 @@ public class BookingDaoTestSuite {
         toolRepository.save(tool);
 
         //When
-        dao.save(booking);
-        long id = booking.getId();
+        repository.save(booking);
+        long bookingId = booking.getId();
+        long orderId = order.getId();
+        long groupId = group.getId();
+        long locationId = location.getId();
+        long toolId = tool.getId();
+
 
         //Then
-        assertTrue(dao.findAll().size() > 0);
-        assertEquals(LocalDate.of(2020, 10, 11), dao.findBookingsById(id).getBookedDateFrom());
+        assertTrue(repository.findAll().size() > 0);
+        assertEquals(LocalDate.of(2020, 10, 11), repository.findBookingsById(bookingId).getBookedDateFrom());
 
         //CleanUp
-        cleanUp();
+        repository.deleteById(bookingId);
+        toolRepository.deleteById(toolId);
+        orderRepository.deleteById(orderId);
+        groupRepository.deleteById(groupId);
+        locationRepository.deleteById(locationId);
     }
 }

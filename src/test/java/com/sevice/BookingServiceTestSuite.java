@@ -103,12 +103,6 @@ public class BookingServiceTestSuite {
 
         userService.save(user);
 
-        Order order = Order.builder()
-                .user(user)
-                .build();
-
-        orderService.saveOrder(order);
-
         Booking theBooking = Booking.builder()
                 .tool(tool)
                 .bookedDateFrom(LocalDate.of(2020, 10, 1))

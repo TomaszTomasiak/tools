@@ -22,6 +22,9 @@ public class BookingDto {
     @JsonSerialize(using = ToStringSerializer.class)
     private LocalDate bookedDateTo;
 
-    private Long toolId;
+    private long toolId;
+
+    private long orderId;
+
 
 }
