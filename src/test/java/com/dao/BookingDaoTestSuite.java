@@ -57,8 +57,6 @@ public class BookingDaoTestSuite {
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
     }
 
-    @After
-
 
 
     @Test
