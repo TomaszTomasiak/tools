@@ -38,6 +38,9 @@ public class BookingServiceTestSuite {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private LocationServiceImpl locationService;
+
 
     @Test
     public void testSaveAndGetAllBookings () {
@@ -84,10 +87,16 @@ public class BookingServiceTestSuite {
                 .build();
         groupService.saveGroup(group);
 
+        Location location = Location.builder()
+                .country("Poland")
+                .build();
+        locationService.saveLocation(location);
+
         Tool tool = Tool.builder()
                 .name("betoniarka")
                 .group(group)
                 .rentRate(BigDecimal.TEN)
+                .location(location)
                 .build();
 
         toolService.saveTool(tool);
@@ -103,10 +112,17 @@ public class BookingServiceTestSuite {
 
         userService.save(user);
 
+        Order order = Order.builder()
+                .user(user)
+                .build();
+
+        orderService.saveOrder(order);
+
         Booking theBooking = Booking.builder()
                 .tool(tool)
                 .bookedDateFrom(LocalDate.of(2020, 10, 1))
                 .bookedDateTo(LocalDate.of(2020, 10, 22))
+                .order(order)
                 .build();
 
         //When
