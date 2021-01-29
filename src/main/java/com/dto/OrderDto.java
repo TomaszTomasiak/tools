@@ -1,6 +1,8 @@
 package com.dto;
 
 import com.domain.Booking;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,12 +16,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDto {
     private long id;
     private long userId;
 
-    @Builder.Default
-    private List<Booking> bookings = new ArrayList<>();
+    @JsonIgnore
+    private List<Booking> bookings;
 
     private BigDecimal totalCost;
 }

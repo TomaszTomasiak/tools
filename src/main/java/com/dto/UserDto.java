@@ -2,6 +2,8 @@ package com.dto;
 
 
 import com.domain.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
     private long id;
@@ -22,5 +25,7 @@ public class UserDto {
     private String password;
     private String phone;
     private String pesel;
+
+    @JsonIgnore
     private Set<UserRole> userRoleSet;
 }

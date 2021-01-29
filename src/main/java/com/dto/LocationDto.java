@@ -1,6 +1,8 @@
 package com.dto;
 
 import com.domain.Tool;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LocationDto {
     private long id;
     private String country;
@@ -22,7 +25,7 @@ public class LocationDto {
     private String email;
     private String phone;
 
-    @Builder.Default
-    private List<Tool> toolList = new ArrayList<>();
+    @JsonIgnore
+    private List<Tool> toolList;
 
 }
