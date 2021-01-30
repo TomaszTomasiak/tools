@@ -8,14 +8,12 @@ import com.repository.BookingRepository;
 import com.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -89,11 +87,18 @@ public class BookingServiceTestSuite {
 
         Location location = Location.builder()
                 .country("Poland")
+                .city("Warsaw")
+                .zipCode("00-950")
+                .address("Woronicza 17")
+                .email("email111111@test.pl")
+                .phone("666111333")
                 .build();
         locationService.saveLocation(location);
 
         Tool tool = Tool.builder()
                 .name("betoniarka")
+                .model("XYZ")
+                .producer("Suzuki")
                 .group(group)
                 .rentRate(BigDecimal.TEN)
                 .location(location)
@@ -104,9 +109,9 @@ public class BookingServiceTestSuite {
         User user = User.builder()
                 .name("Zbigniew")
                 .surname("Kos")
-                .email("test1222@mail.com")
+                .email("test1211122@mail.com")
                 .password("password2222")
-                .pesel("1212121200")
+                .pesel("99887744")
                 .phone("222222222")
                 .build();
 
@@ -135,9 +140,10 @@ public class BookingServiceTestSuite {
 
         int bookingListSizeAfterDeleteBooking = bookingService.getAllBookings().size();
         //Then
-       assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
-       assertEquals(bookingListSizeBeforeSavingNewBooking +1 , bookingListSizeAfterSaveBooking);
+
+       assertEquals(bookingListSizeBeforeSavingNewBooking + 1 , bookingListSizeAfterSaveBooking);
        assertFalse(bookingService.getBooking(theBookingId).isPresent());
+       assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
     }
 
     @Test

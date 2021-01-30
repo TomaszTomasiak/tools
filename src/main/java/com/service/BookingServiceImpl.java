@@ -17,7 +17,6 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     BookingRepository repository;
 
-
     @Override
     public List<Booking> getAllBookings() {
         return repository.findAll();
