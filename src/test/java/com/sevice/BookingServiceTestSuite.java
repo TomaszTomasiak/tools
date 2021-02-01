@@ -142,8 +142,8 @@ public class BookingServiceTestSuite {
         //Then
 
        assertEquals(bookingListSizeBeforeSavingNewBooking + 1 , bookingListSizeAfterSaveBooking);
-       assertFalse(bookingService.getBooking(theBookingId).isPresent());
        assertEquals(bookingListSizeBeforeSavingNewBooking, bookingListSizeAfterDeleteBooking);
+       assertFalse(bookingService.getBooking(theBookingId).isPresent());
     }
 
     @Test

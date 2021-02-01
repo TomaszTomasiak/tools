@@ -23,22 +23,22 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Optional<Booking> getBooking(long id) {
+    public Optional<Booking> getBooking(final long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Booking saveBookings(Booking booking) {
+    public Booking saveBookings(final Booking booking) {
         return repository.save(booking);
     }
 
     @Override
-    public Booking getBookingById(long id) {
+    public Booking getBookingById(final long id) {
         return repository.findBookingsById(id);
     }
 
     @Override
-    public void deleteBooking(long id) {
+    public void deleteBooking(final long id) {
         repository.deleteById(id);
     }
 }

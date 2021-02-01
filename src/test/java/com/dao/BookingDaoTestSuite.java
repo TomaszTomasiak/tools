@@ -140,7 +140,7 @@ public class BookingDaoTestSuite {
 
 
         //Then
-        assertEquals(number, numberAfterDelete);
+        assertEquals(number, numberAfterDelete-1);
 
         //CleanUp
         repository.deleteById(bookingId);

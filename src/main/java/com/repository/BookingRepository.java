@@ -14,4 +14,7 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
     List<Booking> findAll();
 
     Booking findBookingsById(Long id);
+
+    @Override
+    void deleteById(Long id);
 }
