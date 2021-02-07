@@ -33,7 +33,7 @@ public class Cart implements Serializable {
             cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY
     )
-    private List<Booking> orderItems = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 
     @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
     private Order order;

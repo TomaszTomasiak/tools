@@ -23,17 +23,17 @@ public class Tool {
     private String name;
 
     @Column(name = "producer")
-    private String producer;
+    private String producer; // change to Producer.class
 
     @Column(name = "model")
     private String model;
 
+    @Column(name = "rate")
+    private BigDecimal rentRate;
+
     @ManyToOne
     @JoinColumn(name = "groupId")
     private ToolsGroup group;
-
-    @Column(name = "rate")
-    private BigDecimal rentRate;
 
     @ManyToOne
     @JoinColumn(name = "locationId")
