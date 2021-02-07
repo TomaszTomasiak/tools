@@ -28,11 +28,10 @@ public class Booking {
     private LocalDate bookedDateTo;
 
 
-    @ManyToOne
-    @JoinColumn(name = "TOOL_ID")
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Tool tool;
 
     @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
-    private Order order;
+    @JoinColumn(name = "CART_ID")
+    private Cart cart;
 }

@@ -39,14 +39,4 @@ public class Tool {
     @JoinColumn(name = "locationId")
     private Location location;
 
-//    private boolean available;
-
-    @Builder.Default
-    @OneToMany(
-            targetEntity = Booking.class,
-            mappedBy = "tool",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
-    )
-    private List<Booking> toolsBookings = new ArrayList<>();
 }
