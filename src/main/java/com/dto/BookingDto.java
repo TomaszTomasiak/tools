@@ -24,7 +24,7 @@ public class BookingDto {
 
     private long toolId;
 
-    private long orderId;
+    private long cartId;
 
 
 }

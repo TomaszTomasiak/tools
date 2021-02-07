@@ -2,6 +2,7 @@ package com.mapper;
 
 import com.domain.Booking;
 import com.dto.BookingDto;
+import com.repository.CartRepository;
 import com.repository.OrderRepository;
 import com.repository.ToolRepository;
 import com.repository.UserRepository;
@@ -20,7 +21,7 @@ public class BookingMapper {
     private ToolRepository toolRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private CartRepository cartRepository;
 
     public Booking mapToBookings(final BookingDto dto) {
         Booking bookingBean = new Booking();
@@ -28,9 +29,8 @@ public class BookingMapper {
         bookingBean.setBookedDateFrom(dto.getBookedDateFrom());
         bookingBean.setBookedDateTo(dto.getBookedDateTo());
         bookingBean.setTool(toolRepository.findToolById(dto.getToolId()));
-        bookingBean.setOrder(orderRepository.findOrderById(dto.getOrderId()));
+        bookingBean.setCart(cartRepository.findById(dto.getCartId()).orElse(null));
         return bookingBean;
-
     }
 
     public BookingDto mapToDto(final Booking booking) {
@@ -39,11 +39,10 @@ public class BookingMapper {
         dtoBean.setBookedDateFrom(booking.getBookedDateFrom());
         dtoBean.setBookedDateTo(booking.getBookedDateTo());
         dtoBean.setToolId(booking.getTool().getId());
-        if(booking.getOrder()== null) {
-            dtoBean.setOrderId(0);
-        }
-        else {
-            dtoBean.setOrderId(booking.getOrder().getId());
+        if (booking.getCart() == null) {
+            dtoBean.setCartId(0);
+        } else {
+            dtoBean.setCartId(booking.getCart().getId());
         }
         return dtoBean;
     }
