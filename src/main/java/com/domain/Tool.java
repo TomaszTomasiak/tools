@@ -23,30 +23,20 @@ public class Tool {
     private String name;
 
     @Column(name = "producer")
-    private String producer;
+    private String producer; // change to Producer.class
 
     @Column(name = "model")
     private String model;
-
-    @ManyToOne
-    @JoinColumn(name = "groupId")
-    private ToolsGroup group;
 
     @Column(name = "rate")
     private BigDecimal rentRate;
 
     @ManyToOne
+    @JoinColumn(name = "groupId")
+    private ToolsGroup group;
+
+    @ManyToOne
     @JoinColumn(name = "locationId")
     private Location location;
 
-//    private boolean available;
-
-    @Builder.Default
-    @OneToMany(
-            targetEntity = Booking.class,
-            mappedBy = "tool",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
-    )
-    private List<Booking> toolsBookings = new ArrayList<>();
 }

@@ -20,10 +20,7 @@ import java.util.List;
 public class OrderDto {
     private long id;
     private long userId;
-
-    @JsonIgnore
-    private List<Booking> bookings;
-
+    private long cartId;
     private BigDecimal totalCost;
 }
 

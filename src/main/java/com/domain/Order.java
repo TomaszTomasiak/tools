@@ -27,12 +27,7 @@ public class Order {
     private User user;
 
 
-    @Builder.Default
-    @OneToMany(
-            targetEntity = Booking.class,
-            mappedBy = "order",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<Booking> bookings = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cart_id")
+    private Cart cart;
 }
