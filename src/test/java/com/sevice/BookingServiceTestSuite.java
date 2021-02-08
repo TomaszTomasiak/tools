@@ -40,6 +40,8 @@ public class BookingServiceTestSuite {
     private LocationServiceImpl locationService;
 
 
+
+
     @Test
     public void testSaveAndGetAllBookings () {
         //Given
@@ -127,7 +129,6 @@ public class BookingServiceTestSuite {
                 .tool(tool)
                 .bookedDateFrom(LocalDate.of(2020, 10, 1))
                 .bookedDateTo(LocalDate.of(2020, 10, 22))
-                .order(order)
                 .build();
 
         //When

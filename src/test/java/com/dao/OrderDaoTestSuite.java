@@ -25,7 +25,7 @@ public class OrderDaoTestSuite {
         orderRepository.save(order);
         long id = order.getId();
 
-        assertEquals(0, order.getBookings().size());
+        assertEquals(0, order.getCart().getBookings().size());
         assertNotEquals(0, id);
     }
 }

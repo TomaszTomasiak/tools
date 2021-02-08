@@ -1,9 +1,6 @@
 package com.mapper;
 
-import com.domain.Booking;
-import com.domain.Order;
-import com.domain.Tool;
-import com.domain.User;
+import com.domain.*;
 import com.dto.OrderDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -113,10 +110,13 @@ public class OrderMapperTestSuite {
         bookings.add(booking1);
         bookings.add(booking2);
 
+        Cart cart = new Cart();
+        cart.setBookings(bookings);
+
         Order order = Order.builder()
                 .id(7L)
                 .user(user)
-                .bookings(bookings)
+                .cart(cart)
                 .build();
 
         //When
@@ -133,12 +133,16 @@ public class OrderMapperTestSuite {
                 .id(5L)
                 .build();
 
+
+
         List<Booking> bookings = new ArrayList<>();
+        Cart cart = new Cart();
+        cart.setBookings(bookings);
 
         Order order = Order.builder()
                 .id(7L)
                 .user(user)
-                .bookings(bookings)
+                .cart(cart)
                 .build();
 
         //When

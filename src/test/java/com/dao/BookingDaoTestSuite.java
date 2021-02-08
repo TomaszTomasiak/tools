@@ -39,19 +39,24 @@ public class BookingDaoTestSuite {
     private ToolsGroup group;
     private Booking booking;
     private Location location;
+    private Cart cart;
+    private User user;
 
     @Before
     public void init() {
         order = new Order();
         group = new ToolsGroup();
+        user = new User();
         group.setName("name");
         location = new Location();
         location.setCountry("Russia");
         tool = ToolCreator.toolCreator();
         tool.setGroup(group);
         tool.setLocation(location);
+        cart = new Cart();
+        cart.setUser(user);
         booking = new Booking();
-        booking.setOrder(order);
+        booking.setCart(cart);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));
         booking.setBookedDateTo(LocalDate.of(2020, 10, 25));
