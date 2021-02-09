@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.jws.WebParam;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,4 +32,12 @@ public class Producer {
             fetch = FetchType.LAZY
     )
     private List<Tool> toolList = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(
+            targetEntity = Model.class,
+            mappedBy = "producer",
+            fetch = FetchType.LAZY
+    )
+    private List<Model> modelList = new ArrayList<>();
 }

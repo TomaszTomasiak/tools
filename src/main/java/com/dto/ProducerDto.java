@@ -1,5 +1,6 @@
 package com.dto;
 
+import com.domain.Model;
 import com.domain.Tool;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,4 +23,6 @@ public class ProducerDto {
     @JsonIgnore
     private List<Tool> toolList;
 
+    @JsonIgnore
+    private List<Model> modelList;
 }

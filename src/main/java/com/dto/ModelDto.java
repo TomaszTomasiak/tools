@@ -18,7 +18,10 @@ import java.util.List;
 public class ModelDto {
     private long id;
     private String name;
+    private long producerId;
 
     @JsonIgnore
     private List<Tool> toolList;
+
+
 }

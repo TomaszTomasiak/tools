@@ -24,6 +24,10 @@ public class Model {
     @Column(name = "name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "producer")
+    private Producer producer;
+
     @Builder.Default
     @OneToMany(
             targetEntity = Tool.class,
