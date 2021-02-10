@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 public class ToolDto {
     private long id;
     private String name;
-    private String producer;
-    private String model;
+    private long producerId;
+    private long modelId;
     private long groupId;
     private BigDecimal rentRate;
     private long locationId;

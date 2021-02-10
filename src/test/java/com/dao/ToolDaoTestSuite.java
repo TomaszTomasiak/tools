@@ -1,10 +1,6 @@
 package com.dao;
-import com.domain.Location;
-import com.domain.Tool;
-import com.domain.ToolsGroup;
-import com.repository.LocationRepository;
-import com.repository.ToolRepository;
-import com.repository.ToolsGroupRepository;
+import com.domain.*;
+import com.repository.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +22,17 @@ public class ToolDaoTestSuite {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Autowired
+    private ProducerRepository producerRepository;
+
+    @Autowired
+    private ModelRepository modelRepository;
+
     private ToolsGroup toolsGroup;
     private Tool tool;
     private Location location;
+    private Producer producer;
+    private Model model;
 
     @Before
     public void init() {
@@ -38,10 +42,15 @@ public class ToolDaoTestSuite {
         location = new Location();
         location.setCity("Warsaw");
 
+        producer = new Producer();
+        producer.setName("Bosch");
+
+        model = new Model();
+        model.setProducer(producer);
+        model.setName("XYZ123");
+
         tool = new Tool();
-        tool.setModel("XYZ123");
         tool.setName("wiertarka");
-        tool.setProducer("Bosch");
     }
 
     @Test
@@ -50,8 +59,12 @@ public class ToolDaoTestSuite {
         //When
         groupDao.save(toolsGroup);
         locationRepository.save(location);
+        producerRepository.save(producer);
+        modelRepository.save(model);
         tool.setGroup(toolsGroup);
         tool.setLocation(location);
+        tool.setModel(model);
+        tool.setProducer(producer);
         toolDao.save(tool);
 
         //Then

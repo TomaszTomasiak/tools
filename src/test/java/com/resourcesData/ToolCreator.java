@@ -1,15 +1,13 @@
 package com.resourcesData;
 
 
-import com.domain.Location;
-import com.domain.Tool;
-import com.domain.ToolsGroup;
+import com.domain.*;
 
 public class ToolCreator {
     public static long ID = 1L;
     public static String NAME = "wiertarka";
-    public static String PRODUCER = "BOSH";
-    public static String MODEL = "12LXC78";
+    public static long PRODUCER_ID = 2L;
+    public static long MODEL_ID = 3L;
     public static ToolsGroup GROUP = new ToolsGroup();
     public static Location LOCATION = new Location();
 
@@ -24,8 +22,8 @@ public class ToolCreator {
         return Tool.builder()
                 //.id(ID)
                 .name(NAME                )
-                .producer(PRODUCER)
-                .model(MODEL)
+                .producer(new Producer())
+                .model(new Model())
                 .group(GROUP)
                 .location(LOCATION)
                 .build();
@@ -35,8 +33,8 @@ public class ToolCreator {
         return Tool.builder()
                 //.id(UPDATED_ID)
                 .name(UPDATED_NAME                )
-                .producer(UPDATED_PRODUCER)
-                .model(UPDATED_MODEL)
+                .producer(new Producer())
+                .model(new Model())
                 .group(UPDATED_GROUP)
                 .location(UPDATED_LOCATION)
                 .build();
