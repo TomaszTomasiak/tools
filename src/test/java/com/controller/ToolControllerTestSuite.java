@@ -61,7 +61,7 @@ public class ToolControllerTestSuite {
                 .andExpect(jsonPath("$", hasSize(1)))
 //                .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is(toolDto.getName())))
-                .andExpect(jsonPath("$[0].model", is(toolDto.getModel())))
+                .andExpect(jsonPath("$[0].model", is(toolDto.getModelId())))
                 .andExpect(jsonPath("$[0].groupId", is(9)));
     }
 
@@ -76,8 +76,8 @@ public class ToolControllerTestSuite {
         mockMvc.perform(get("/api/v1/tools/"+toolDto.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(toolDto.getName())))
-                .andExpect(jsonPath("$.producer", is(toolDto.getProducer())))
-                .andExpect(jsonPath("$.model", is(toolDto.getModel())));
+                .andExpect(jsonPath("$.producer", is(toolDto.getProducerId())))
+                .andExpect(jsonPath("$.model", is(toolDto.getModelId())));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class ToolControllerTestSuite {
                 .content(jsonContent))
 //                .andExpect(jsonPath("$.id", is(87)))
                 .andExpect(jsonPath("$.name", is(updatedToolDto.getName())))
-                .andExpect(jsonPath("$.model", is(updatedToolDto.getModel())));
+                .andExpect(jsonPath("$.model", is(updatedToolDto.getModelId())));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class ToolControllerTestSuite {
                 .andExpect(status().isOk())
                 //.andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is(toolDto.getName())))
-                .andExpect(jsonPath("$.producer", is(toolDto.getProducer())));
+                .andExpect(jsonPath("$.producer", is(toolDto.getProducerId())));
     }
 
     @Test

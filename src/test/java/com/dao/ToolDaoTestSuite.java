@@ -117,12 +117,16 @@ public class ToolDaoTestSuite {
         //Given
         //When
         groupDao.save(toolsGroup);
+        producerRepository.save(producer);
+        modelRepository.save(model);
         tool.setGroup(toolsGroup);
+        tool.setProducer(producer);
+        tool.setModel(model);
         toolDao.save(tool);
         long id = tool.getId();
         //Then
         assertTrue(toolDao.findAll().size() > 0);
-        assertEquals("XYZ123", tool.getModel());
+        assertEquals("XYZ123", tool.getModel().getName());
 
         //CleanUp
         toolDao.deleteAll();

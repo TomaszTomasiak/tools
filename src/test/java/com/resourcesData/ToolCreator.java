@@ -13,8 +13,8 @@ public class ToolCreator {
 
     public static long UPDATED_ID = 1L;
     public static String UPDATED_NAME = "młot pneumatyczny";
-    public static String UPDATED_PRODUCER = "CAT";
-    public static String UPDATED_MODEL = "CP4222";
+    public static long UPDATED_PRODUCER_ID = 1L;
+    public static long UPDATED_MODEL_ID = 5L;
     public static ToolsGroup UPDATED_GROUP = new ToolsGroup();
     public static Location UPDATED_LOCATION = new Location();
 

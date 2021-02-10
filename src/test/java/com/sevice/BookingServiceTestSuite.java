@@ -5,6 +5,7 @@ import com.exception.EmailExistsException;
 import com.exception.NotFoundException;
 import com.exception.PeselExistException;
 import com.repository.BookingRepository;
+import com.resourcesData.ToolCreator;
 import com.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,15 +98,7 @@ public class BookingServiceTestSuite {
                 .build();
         locationService.saveLocation(location);
 
-        Tool tool = Tool.builder()
-                .name("betoniarka")
-                .model("XYZ")
-                .producer("Suzuki")
-                .group(group)
-                .rentRate(BigDecimal.TEN)
-                .location(location)
-                .build();
-
+        Tool tool = ToolCreator.toolCreator();
         toolService.saveTool(tool);
 
         User user = User.builder()

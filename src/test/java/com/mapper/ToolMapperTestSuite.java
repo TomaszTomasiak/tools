@@ -1,8 +1,6 @@
 package com.mapper;
 
-import com.domain.Location;
-import com.domain.Tool;
-import com.domain.ToolsGroup;
+import com.domain.*;
 import com.dto.ToolDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,8 +30,8 @@ public class ToolMapperTestSuite {
     private Tool tool = Tool.builder()
             .id(2L)
             .name("wiertarka")
-            .producer("Bosch")
-            .model("CV14J7")
+            .producer(Producer.builder().id(2).name("Bosch").build())
+            .model(Model.builder().id(3).name("CV14J7").build())
             .group(group)
             .rentRate(BigDecimal.ONE)
             .location(Location.builder().id(4L).build())
@@ -42,8 +40,8 @@ public class ToolMapperTestSuite {
     private ToolDto toolDto = ToolDto.builder()
             .id(8L)
             .name("młot pneumatyczny")
-            .producer("Makita")
-            .model("L12")
+            .producerId(6)
+            .modelId(3)
             .build();
 
     @Test
@@ -71,7 +69,7 @@ public class ToolMapperTestSuite {
         //Then
         assertNotNull(toolDto);
         assertEquals(2L, toolDto.getId());
-        assertEquals("Bosch", toolDto.getProducer());
+        assertEquals(6, toolDto.getProducerId());
         assertEquals("wiertarka", toolDto.getName());
 
     }
