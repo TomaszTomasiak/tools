@@ -26,15 +26,17 @@ public class BookingDaoTestSuite {
     private ToolRepository toolRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
     private ToolsGroupRepository groupRepository;
 
     @Autowired
     private LocationRepository locationRepository;
 
-    private Order order;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
     private Tool tool;
     private ToolsGroup group;
     private Booking booking;
@@ -44,7 +46,6 @@ public class BookingDaoTestSuite {
 
     @Before
     public void init() {
-        order = new Order();
         group = new ToolsGroup();
         user = new User();
         group.setName("name");
@@ -67,7 +68,7 @@ public class BookingDaoTestSuite {
     @Test
     public void testBookingDaoSave() {
         //Given
-        orderRepository.save(order);
+
         groupRepository.save(group);
         locationRepository.save(location);
         toolRepository.save(tool);
@@ -75,7 +76,6 @@ public class BookingDaoTestSuite {
         //When
         repository.save(booking);
         long bookingId = booking.getId();
-        long orderId = order.getId();
         long groupId = group.getId();
         long locationId = location.getId();
         long toolId = tool.getId();
@@ -88,7 +88,6 @@ public class BookingDaoTestSuite {
         //CleanUp
         repository.deleteById(bookingId);
         toolRepository.deleteById(toolId);
-        orderRepository.deleteById(orderId);
         groupRepository.deleteById(groupId);
         locationRepository.deleteById(locationId);
     }
@@ -96,7 +95,7 @@ public class BookingDaoTestSuite {
     @Test
     public void testFindAllBookings() {
         //Given
-        orderRepository.save(order);
+
         groupRepository.save(group);
         locationRepository.save(location);
         toolRepository.save(tool);
@@ -104,7 +103,6 @@ public class BookingDaoTestSuite {
         //When
         repository.save(booking);
         long bookingId = booking.getId();
-        long orderId = order.getId();
         long groupId = group.getId();
         long locationId = location.getId();
         long toolId = tool.getId();
@@ -116,7 +114,6 @@ public class BookingDaoTestSuite {
         //CleanUp
         repository.deleteById(bookingId);
         toolRepository.deleteById(toolId);
-        orderRepository.deleteById(orderId);
         groupRepository.deleteById(groupId);
         locationRepository.deleteById(locationId);
     }
@@ -125,7 +122,6 @@ public class BookingDaoTestSuite {
     public void testRemoveBooking() {
 
         //Given
-        orderRepository.save(order);
         groupRepository.save(group);
         locationRepository.save(location);
         toolRepository.save(tool);
@@ -137,8 +133,6 @@ public class BookingDaoTestSuite {
         repository.deleteById(bookingId);
         int numberAfterDelete = repository.findAll().size();
 
-
-        long orderId = order.getId();
         long groupId = group.getId();
         long locationId = location.getId();
         long toolId = tool.getId();
@@ -150,7 +144,6 @@ public class BookingDaoTestSuite {
         //CleanUp
         repository.deleteById(bookingId);
         toolRepository.deleteById(toolId);
-        orderRepository.deleteById(orderId);
         groupRepository.deleteById(groupId);
         locationRepository.deleteById(locationId);
     }
@@ -158,7 +151,6 @@ public class BookingDaoTestSuite {
     @Test
     public void testFindBookingById() {
         //Given
-        orderRepository.save(order);
         groupRepository.save(group);
         locationRepository.save(location);
         toolRepository.save(tool);
@@ -166,7 +158,6 @@ public class BookingDaoTestSuite {
         //When
         repository.save(booking);
         long bookingId = booking.getId();
-        long orderId = order.getId();
         long groupId = group.getId();
         long locationId = location.getId();
         long toolId = tool.getId();
@@ -179,7 +170,6 @@ public class BookingDaoTestSuite {
         //CleanUp
         repository.deleteById(bookingId);
         toolRepository.deleteById(toolId);
-        orderRepository.deleteById(orderId);
         groupRepository.deleteById(groupId);
         locationRepository.deleteById(locationId);
     }
