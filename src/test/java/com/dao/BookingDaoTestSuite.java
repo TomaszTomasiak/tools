@@ -72,6 +72,8 @@ public class BookingDaoTestSuite {
         groupRepository.save(group);
         locationRepository.save(location);
         toolRepository.save(tool);
+        userRepository.save(user);
+        cartRepository.save(cart);
 
         //When
         repository.save(booking);
