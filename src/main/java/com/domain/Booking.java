@@ -28,7 +28,7 @@ public class Booking {
     private LocalDate bookedDateTo;
 
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Tool tool;
 
     @ManyToOne

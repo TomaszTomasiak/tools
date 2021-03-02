@@ -41,5 +41,4 @@ public class Tool {
     @ManyToOne
     @JoinColumn(name = "locationId")
     private Location location;
-
 }
