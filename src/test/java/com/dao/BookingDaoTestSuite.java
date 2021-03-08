@@ -212,6 +212,8 @@ public class BookingDaoTestSuite {
         repository.save(booking);
         int number = repository.findAll().size();
         long bookingId = booking.getId();
+        repository.findBookingsById(bookingId);
+
         repository.deleteById(bookingId);
         int numberAfterDelete = repository.findAll().size();
 
@@ -221,7 +223,7 @@ public class BookingDaoTestSuite {
 
 
         //Then
-        assertEquals(number, numberAfterDelete-1);
+        assertEquals(number -1 , numberAfterDelete);
 
         //CleanUp
         repository.deleteById(bookingId);
@@ -256,6 +258,7 @@ public class BookingDaoTestSuite {
         cart.setUser(user);
         cartRepository.save(cart);
         Booking booking = new Booking();
+
         booking.setCart(cart);
         booking.setTool(tool);
         booking.setBookedDateFrom(LocalDate.of(2020, 10, 11));

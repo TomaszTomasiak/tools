@@ -27,8 +27,8 @@ public class Booking {
     @Column(name = "BOOKED_TO")
     private LocalDate bookedDateTo;
 
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "TOOL_ID")
     private Tool tool;
 
     @ManyToOne

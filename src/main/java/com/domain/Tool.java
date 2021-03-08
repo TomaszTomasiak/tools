@@ -41,4 +41,14 @@ public class Tool {
     @ManyToOne
     @JoinColumn(name = "locationId")
     private Location location;
+
+    @Builder.Default
+    @OneToMany(
+            targetEntity = Booking.class,
+            mappedBy = "tool",
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.LAZY
+    )
+    private List<Booking> bookings = new ArrayList<>();
+
 }
