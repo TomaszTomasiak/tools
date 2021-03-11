@@ -30,7 +30,7 @@ public class Cart implements Serializable {
     @OneToMany(
             targetEntity = Booking.class,
             mappedBy = "cart",
-            cascade = CascadeType.MERGE,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Booking> bookings = new ArrayList<>();
