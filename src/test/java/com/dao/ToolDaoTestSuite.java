@@ -1,8 +1,9 @@
 package com.dao;
 import com.domain.*;
 import com.repository.*;
-import org.junit.Before;
+import com.resourcesData.ToolCreator;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,11 +14,12 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ToolDaoTestSuite {
-    @Autowired
-    private ToolsGroupRepository groupDao;
 
     @Autowired
-    private ToolRepository toolDao;
+    private ToolRepository toolRepository;
+
+    @Autowired
+    private ToolsGroupRepository groupRepository;
 
     @Autowired
     private LocationRepository locationRepository;
@@ -28,108 +30,142 @@ public class ToolDaoTestSuite {
     @Autowired
     private ModelRepository modelRepository;
 
-    private ToolsGroup toolsGroup;
-    private Tool tool;
-    private Location location;
-    private Producer producer;
-    private Model model;
-
-    @Before
-    public void init() {
-        toolsGroup = new ToolsGroup();
-        toolsGroup.setName("budowlane");
-
-        location = new Location();
-        location.setCity("Warsaw");
-
-        producer = new Producer();
-        producer.setName("Bosch");
-
-        model = new Model();
-        model.setProducer(producer);
-        model.setName("XYZ123");
-
-        tool = new Tool();
-        tool.setName("wiertarka");
+    @AfterEach
+    public void clearUp() {
+        producerRepository.deleteAll();
+        modelRepository.deleteAll();
+        toolRepository.deleteAll();
+        groupRepository.deleteAll();
+        locationRepository.deleteAll();
     }
 
     @Test
     public void testToolDaoSave() {
         //Given
-        //When
-        groupDao.save(toolsGroup);
+        ToolsGroup group = new ToolsGroup();
+        group.setName("name");
+        groupRepository.save(group);
+        Location location = new Location();
+        location.setCountry("Russia");
         locationRepository.save(location);
+        Producer producer = new Producer();
+        producer.setName("XYZ");
         producerRepository.save(producer);
+        Model model = Model.builder().name("NNN").producer(producer).build();
         modelRepository.save(model);
-        tool.setGroup(toolsGroup);
+        Tool tool = ToolCreator.toolCreator();
+        tool.setName("wiertarka");
+        tool.setGroup(group);
         tool.setLocation(location);
-        tool.setModel(model);
         tool.setProducer(producer);
-        toolDao.save(tool);
+        tool.setModel(model);
+
+        //When
+        toolRepository.save(tool);
 
         //Then
-        assertTrue(toolDao.count() > 0);
-        assertNotEquals(0, toolDao.findAll().size());
+        assertTrue(toolRepository.count() > 0);
+        assertNotEquals(0, toolRepository.findAll().size());
         assertEquals("wiertarka", tool.getName());
 
         //CleanUp
-        toolDao.deleteAll();
-        groupDao.deleteAll();
     }
 
     @Test
     public void testFindAllTools() {
         //Given
+        ToolsGroup group = new ToolsGroup();
+        group.setName("name");
+        groupRepository.save(group);
+        Location location = new Location();
+        location.setCountry("Russia");
+        locationRepository.save(location);
+        Producer producer = new Producer();
+        producer.setName("XYZ");
+        producerRepository.save(producer);
+        Model model = Model.builder().name("NNN").producer(producer).build();
+        modelRepository.save(model);
+        Tool tool = ToolCreator.toolCreator();
+        tool.setName("wiertarka");
+        tool.setGroup(group);
+        tool.setLocation(location);
+        tool.setProducer(producer);
+        tool.setModel(model);
+
         //When
-        groupDao.save(toolsGroup);
-        tool.setGroup(toolsGroup);
-        toolDao.save(tool);
+        toolRepository.save(tool);
+
         //Then
-        assertTrue(toolDao.findAll().size() > 0);
+        assertTrue(toolRepository.findAll().size() > 0);
 
         //CleanUp
-        toolDao.deleteAll();
-        groupDao.deleteAll();
     }
 
     @Test
     public void testRemoveTool() {
 
         //Given
+        ToolsGroup group = new ToolsGroup();
+        group.setName("name");
+        groupRepository.save(group);
+        Location location = new Location();
+        location.setCountry("Russia");
+        locationRepository.save(location);
+        Producer producer = new Producer();
+        producer.setName("XYZ");
+        producerRepository.save(producer);
+        Model model = Model.builder().name("NNN").producer(producer).build();
+        modelRepository.save(model);
+        Tool tool = ToolCreator.toolCreator();
+        tool.setName("wiertarka");
+        tool.setGroup(group);
+        tool.setLocation(location);
+        tool.setProducer(producer);
+        tool.setModel(model);
+
         //When
-        groupDao.save(toolsGroup);
-        tool.setGroup(toolsGroup);
-        toolDao.save(tool);
+        toolRepository.save(tool);
         long id = tool.getId();
-        int number = toolDao.findAll().size();
-        toolDao.deleteById(id);
+        int number = toolRepository.findAll().size();
+        toolRepository.deleteById(id);
 
         //Then
-        assertEquals(toolDao.findAll().size(), number - 1);
+        assertEquals(toolRepository.findAll().size(), number - 1);
 
         //CleanUp
-        toolDao.deleteAll();
-        groupDao.deleteAll();
     }
 
     @Test
     public void testFindToolById() {
         //Given
-        //When
-        groupDao.save(toolsGroup);
+        ToolsGroup group = new ToolsGroup();
+        group.setName("name");
+        groupRepository.save(group);
+        Location location = new Location();
+        location.setCountry("Russia");
+        locationRepository.save(location);
+        Producer producer = new Producer();
+        producer.setName("XYZ");
         producerRepository.save(producer);
+        Model model = Model.builder().name("NNN").producer(producer).build();
         modelRepository.save(model);
-        tool.setGroup(toolsGroup);
+        Tool tool = ToolCreator.toolCreator();
+        tool.setName("wiertarka");
+        tool.setGroup(group);
+        tool.setLocation(location);
         tool.setProducer(producer);
         tool.setModel(model);
-        toolDao.save(tool);
+        toolRepository.save(tool);
+        //When
+
         long id = tool.getId();
+        Tool theTool = toolRepository.findToolById(id);
+
         //Then
-        assertTrue(toolDao.findAll().size() > 0);
-        assertEquals("XYZ123", tool.getModel().getName());
+        assertTrue(toolRepository.findAll().size() > 0);
+        assertEquals("NNN", theTool.getModel().getName());
 
         //CleanUp
-        toolDao.deleteAll();
-        groupDao.deleteAll();
+
     }
 }
