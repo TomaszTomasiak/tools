@@ -38,14 +38,14 @@ public class BookingController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public BookingDto createBooking(@RequestBody BookingDto dto) {
         log.debug("REST request to add new booking: {}", dto);
-        service.saveBookings(mapper.mapToBookings(dto));
+        service.saveBookings(mapper.mapToBooking(dto));
         return dto;
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public BookingDto updateBookingById(@PathVariable("id") long id, @RequestBody BookingDto dto) {
         log.debug("REST request to update booking with id: {}", id);
-        return mapper.mapToDto(service.saveBookings(mapper.mapToBookings(dto)));
+        return mapper.mapToDto(service.saveBookings(mapper.mapToBooking(dto)));
     }
 
     @DeleteMapping("/{id}")

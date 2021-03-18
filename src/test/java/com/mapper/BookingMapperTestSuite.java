@@ -58,11 +58,11 @@ public class BookingMapperTestSuite {
             .build();
 
     @Test
-    public void mapToBooking() {
+    public void testMapToBooking() {
         //Given
 
         //When
-        Booking booking1 = mapper.mapToBookings(dto);
+        Booking booking1 = mapper.mapToBooking(dto);
 
 
         //Then
@@ -73,7 +73,7 @@ public class BookingMapperTestSuite {
     }
 
     @Test
-    public void mapToBookingDto() {
+    public void testMapToBookingDto() {
         //Given
 
         //When
@@ -88,7 +88,7 @@ public class BookingMapperTestSuite {
     }
 
     @Test
-    public void mapToBookingDtoList() {
+    public void testMapToBookingDtoList() {
         //Given
 
         List<Booking> bookings = new ArrayList<>();
