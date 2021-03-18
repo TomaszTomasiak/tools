@@ -32,7 +32,7 @@ public class BookingMapper {
     public BookingDto mapToDto(final Booking booking) {
         BookingDto dtoBean = new BookingDto();
         dtoBean.setId(booking.getId());
-        dtoBean.setBookedDateFrom(booking.getBookedDateFrom())
+        dtoBean.setBookedDateFrom(booking.getBookedDateFrom());
         dtoBean.setBookedDateTo(booking.getBookedDateTo());
         dtoBean.setToolId(booking.getTool().getId());
         if (booking.getCart() == null) {
