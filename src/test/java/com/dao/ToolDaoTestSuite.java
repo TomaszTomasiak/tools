@@ -54,7 +54,6 @@ public class ToolDaoTestSuite {
         Model model = Model.builder().name("NNN").producer(producer).build();
         modelRepository.save(model);
         Tool tool = ToolCreator.toolCreator();
-        tool.setName("wiertarka");
         tool.setGroup(group);
         tool.setLocation(location);
         tool.setProducer(producer);
